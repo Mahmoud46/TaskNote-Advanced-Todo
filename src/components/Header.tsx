@@ -11,7 +11,7 @@ export default function Header(): ReactNode {
 					to={"/"}
 					className="flex gap-2 p-2 cursor-pointer pl-4 items-center"
 				>
-					<LuListTodo className="text-2xl" />
+					<LuListTodo className="text-xl" />
 					<p className="text-lg">TaskNote</p>
 				</Link>
 
