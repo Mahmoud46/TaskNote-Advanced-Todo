@@ -1,0 +1,107 @@
+import {
+	LuCalendarPlus,
+	LuCalendarSync,
+	LuChevronDown,
+	LuFileText,
+	LuPenLine,
+	LuStar,
+	LuStarOff,
+	LuTrash,
+} from "react-icons/lu";
+import type { INote } from "../interfaces/Data.interface";
+import { useContext, useState } from "react";
+import { CustomCategoryIcon } from "../libs/icons";
+import { Link } from "react-router-dom";
+import { Context } from "../context/Context";
+import type { IContext } from "../interfaces/Context.interface";
+
+export default function NoteCard({ note }: { note: INote }) {
+	const { dataController } = useContext(Context) as IContext;
+	const [isOpen, setIsOpen] = useState<boolean>(false);
+	return (
+		<div
+			className={`glass flex gap-2 items-start p-1 rounded-2xl transition-all duration-300 max-h-[51px] overflow-hidden flex-none ${
+				isOpen ? "max-h-[1000px]" : ""
+			}`}
+		>
+			<div className="rounded-full flex p-2 pt-3 text-lg">
+				{note.category && <CustomCategoryIcon category={note.category} />}
+				{!note.category && <LuFileText />}
+			</div>
+			<div className="flex-1 flex flex-col items-start">
+				<div className="flex items-center w-full justify-between gap-2">
+					<div className="">
+						<p
+							className={`overflow-hidden transition-all duration-300 ${
+								isOpen ? "max-h-40 mb-2" : "max-h-6"
+							}`}
+						>
+							{note.title}
+						</p>
+						<div className="flex items-center gap-2">
+							<p className="flex gap-1 text-xs items-center">
+								<LuCalendarPlus className="text-sm" />
+								<span>
+									{new Date(note.created_at).toLocaleDateString("en-US", {
+										year: "numeric",
+										month: "short",
+										day: "numeric",
+									})}
+								</span>
+							</p>
+							{note.updated_at && (
+								<p className="flex gap-1 text-xs items-center">
+									<LuCalendarSync className="text-sm" />
+									<span>
+										{new Date(note.updated_at).toLocaleDateString("en-US", {
+											year: "numeric",
+											month: "short",
+											day: "numeric",
+										})}
+									</span>
+								</p>
+							)}
+						</div>
+					</div>
+					<div className="flex glass rounded-full p-0.5 mt-0.5">
+						<Link
+							to={`update-note/${note.note_id}`}
+							className="p-2 text-sm cursor-pointer transition duration-300 hover:bg-white hover:text-gray-900 rounded-full"
+						>
+							<LuPenLine />
+						</Link>
+						<div
+							className="p-2 text-sm cursor-pointer transition duration-300 hover:bg-white hover:text-gray-900 rounded-full"
+							onClick={() => dataController.deleteNote(note.note_id)}
+						>
+							<LuTrash />
+						</div>
+						<div
+							className="p-2 text-sm cursor-pointer transition duration-300 hover:bg-white hover:text-gray-900 rounded-full"
+							onClick={() =>
+								dataController.updateNote({ ...note, is_fav: !note.is_fav })
+							}
+						>
+							{note.is_fav && <LuStarOff />}
+							{!note.is_fav && <LuStar />}
+						</div>
+						<div
+							className="p-2 text-sm cursor-pointer transition duration-300 hover:bg-white hover:text-gray-900 rounded-full"
+							onClick={() => setIsOpen((prev) => !prev)}
+						>
+							<LuChevronDown
+								className={`transition-all duration-300 ${
+									isOpen ? "rotate-180" : ""
+								}`}
+							/>
+						</div>
+					</div>
+				</div>
+
+				<div className="mt-2 py-2 border-t border-gray-600 w-full text-sm pl-1">
+					<p>{note.content}</p>
+				</div>
+			</div>
+		</div>
+	);
+}
