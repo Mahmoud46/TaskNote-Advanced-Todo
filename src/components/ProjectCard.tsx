@@ -39,7 +39,7 @@ export default function ProjectCard({
 					<div className="flex flex-col w-full">
 						<h1 className="text-base line-clamp-1">{project.title}</h1>
 						<p className="text-sm line-clamp-1 opacity-80">
-							{project.description}
+							{project.description.slice(0, 100)}
 						</p>
 					</div>
 				</div>
