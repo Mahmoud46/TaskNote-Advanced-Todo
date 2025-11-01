@@ -24,8 +24,8 @@ export default function ProjectCard({
 }): ReactNode {
 	const { dataController } = useContext(Context) as IContext;
 	return (
-		<div className="flex justify-between items-start glass rounded-xl p-0.5 rounded-tr-3xl">
-			<div className="p-2 flex gap-2 flex-col">
+		<div className="flex items-start glass rounded-xl p-0.5 rounded-tr-3xl">
+			<div className="p-2 flex gap-2 flex-col flex-1">
 				<p className={`${PROJECT_STATUS_COLOR[project.status]} text-xs pl-9`}>
 					{PROJECT_STATUS_MAP[project.status]}
 				</p>
@@ -92,7 +92,7 @@ export default function ProjectCard({
 					</p>
 				</div>
 			</div>
-			<div className="flex flex-col-reverse glass w-fit self-start rounded-full -translate-x-0.5 translate-y-0.5 p-0.5">
+			<div className="flex flex-col-reverse flex-none glass w-fit self-start rounded-full -translate-x-0.5 translate-y-0.5 p-0.5">
 				<div
 					className="p-2 rounded-full w-fit cursor-pointer flex-none transition duration-300 hover:bg-white hover:text-gray-900"
 					onClick={() => dataController.deleteProject(project.project_id)}
