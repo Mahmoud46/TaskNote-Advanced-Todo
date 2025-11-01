@@ -25,7 +25,7 @@ export default function ProjectCard({
 	const { dataController } = useContext(Context) as IContext;
 	return (
 		<div className="flex items-start glass rounded-xl p-0.5 rounded-tr-3xl">
-			<div className="p-2 flex gap-2 flex-col flex-1">
+			<div className="p-2 flex gap-2 flex-col flex-1 flex-wrap">
 				<p className={`${PROJECT_STATUS_COLOR[project.status]} text-xs pl-9`}>
 					{PROJECT_STATUS_MAP[project.status]}
 				</p>
