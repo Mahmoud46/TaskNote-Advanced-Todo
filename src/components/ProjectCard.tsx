@@ -36,7 +36,7 @@ export default function ProjectCard({
 						)}
 						{!project.category && <LuRocket />}
 					</div>
-					<div className="">
+					<div className="flex flex-col">
 						<h1 className="text-base line-clamp-1">{project.title}</h1>
 						<p className="text-sm line-clamp-1 opacity-80">
 							{project.description}
