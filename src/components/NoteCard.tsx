@@ -99,9 +99,11 @@ export default function NoteCard({ note }: { note: INote }) {
 				</div>
 
 				<div className="mt-2 py-2 border-t border-gray-600 w-full text-sm pl-1">
-					<textarea readOnly className="w-full outline-0 h-fit resize-none">
-						{note.content}
-					</textarea>
+					<textarea
+						readOnly
+						className="w-full outline-0 h-fit resize-none"
+						value={note.content}
+					></textarea>
 				</div>
 			</div>
 		</div>

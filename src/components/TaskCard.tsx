@@ -128,9 +128,11 @@ export default function TaskCard({ task }: { task: ITask }): ReactNode {
 				</div>
 
 				<div className="mt-2 py-2 border-t border-gray-600 w-full text-sm pl-1 pr-2">
-					<textarea readOnly className="w-full outline-0 h-fit resize-none">
-						{task.description}
-					</textarea>
+					<textarea
+						readOnly
+						className="w-full outline-0 h-fit resize-none"
+						value={task.description}
+					></textarea>
 				</div>
 			</div>
 		</div>
