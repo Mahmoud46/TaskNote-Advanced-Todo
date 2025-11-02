@@ -168,7 +168,9 @@ export default function Project(): ReactNode {
 													el.style.height = el.scrollHeight + "px";
 												}
 											}}
-										></textarea>
+										>
+											{description}
+										</textarea>
 									</div>
 								)}
 								<div className="w-full h-[280px] relative">
