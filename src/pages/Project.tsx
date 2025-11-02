@@ -1,4 +1,4 @@
-import { useContext, type ReactNode } from "react";
+import { useContext, useEffect, useState, type ReactNode } from "react";
 import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
 import { Context } from "../context/Context";
 import type { IContext } from "../interfaces/Context.interface";
@@ -29,6 +29,15 @@ export default function Project(): ReactNode {
 	const { dataController } = useContext(Context) as IContext;
 	const { project_id } = useParams();
 	const navigate = useNavigate();
+	const [description, setDescription] = useState<string>("");
+
+	useEffect(() => {
+		if (dataController.projectsDataController.includes(project_id as string))
+			setDescription(
+				dataController.projectsDataController.getProject(project_id as string)
+					.description
+			);
+	}, [project_id, dataController.projectsDataController]);
 
 	return (
 		<div className="w-full relative">
@@ -150,11 +159,11 @@ export default function Project(): ReactNode {
 											<span>Description</span>
 										</p>
 										<p className="text-sm pl-5">
-											{
-												dataController.projectsDataController.getProject(
-													project_id as string
-												).description
-											}
+											<textarea
+												readOnly
+												className="w-full outline-0 h-fit resize-none"
+												value={description}
+											></textarea>
 										</p>
 									</div>
 								)}
