@@ -21,9 +21,11 @@ export default function TaskCard({ task }: { task: ITask }): ReactNode {
 
 	const [isDone, setIsDone] = useState<boolean>(task.is_done);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
+	const [description, setDescription] = useState<string>("");
 
 	useEffect(() => {
 		setIsDone(task.is_done);
+		setDescription(task.description);
 	}, [task]);
 
 	return (
@@ -131,7 +133,7 @@ export default function TaskCard({ task }: { task: ITask }): ReactNode {
 					<textarea
 						readOnly
 						className="w-full outline-0 h-fit resize-none"
-						value={task.description}
+						value={description}
 					></textarea>
 				</div>
 			</div>
