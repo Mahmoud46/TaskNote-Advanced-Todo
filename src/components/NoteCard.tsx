@@ -9,7 +9,7 @@ import {
 	LuTrash,
 } from "react-icons/lu";
 import type { INote } from "../interfaces/Data.interface";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CustomCategoryIcon } from "../libs/icons";
 import { Link } from "react-router-dom";
 import { Context } from "../context/Context";
@@ -18,6 +18,11 @@ import type { IContext } from "../interfaces/Context.interface";
 export default function NoteCard({ note }: { note: INote }) {
 	const { dataController } = useContext(Context) as IContext;
 	const [isOpen, setIsOpen] = useState<boolean>(false);
+	const [content, setContent] = useState<string>("");
+
+	useEffect(() => {
+		setContent(note.content);
+	}, [note]);
 	return (
 		<div
 			className={`glass flex gap-2 items-start p-1 rounded-2xl transition-all duration-300 max-h-[51px] overflow-hidden flex-none ${
@@ -102,7 +107,7 @@ export default function NoteCard({ note }: { note: INote }) {
 					<textarea
 						readOnly
 						className="w-full outline-0 h-fit resize-none"
-						value={note.content}
+						value={content}
 					></textarea>
 				</div>
 			</div>
