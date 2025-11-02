@@ -134,6 +134,12 @@ export default function TaskCard({ task }: { task: ITask }): ReactNode {
 						readOnly
 						className="w-full outline-0 h-fit resize-none"
 						value={description}
+						ref={(el) => {
+							if (el) {
+								el.style.height = "auto";
+								el.style.height = el.scrollHeight + "px";
+							}
+						}}
 					></textarea>
 				</div>
 			</div>

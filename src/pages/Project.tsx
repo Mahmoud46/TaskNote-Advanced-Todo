@@ -158,13 +158,17 @@ export default function Project(): ReactNode {
 											<LuNotebook className="text-sm" />
 											<span>Description</span>
 										</p>
-										<p className="text-sm pl-5">
-											<textarea
-												readOnly
-												className="w-full outline-0 h-fit resize-none"
-												value={description}
-											></textarea>
-										</p>
+										<textarea
+											readOnly
+											className="w-full outline-0 resize-none text-sm pl-5 overflow-hidden"
+											value={description}
+											ref={(el) => {
+												if (el) {
+													el.style.height = "auto";
+													el.style.height = el.scrollHeight + "px";
+												}
+											}}
+										></textarea>
 									</div>
 								)}
 								<div className="w-full h-[280px] relative">

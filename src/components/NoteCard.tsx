@@ -23,6 +23,7 @@ export default function NoteCard({ note }: { note: INote }) {
 	useEffect(() => {
 		setContent(note.content);
 	}, [note]);
+
 	return (
 		<div
 			className={`glass flex gap-2 items-start p-1 rounded-2xl transition-all duration-300 max-h-[51px] overflow-hidden flex-none ${
@@ -108,6 +109,12 @@ export default function NoteCard({ note }: { note: INote }) {
 						readOnly
 						className="w-full outline-0 h-fit resize-none"
 						value={content}
+						ref={(el) => {
+							if (el) {
+								el.style.height = "auto";
+								el.style.height = el.scrollHeight + "px";
+							}
+						}}
 					></textarea>
 				</div>
 			</div>
