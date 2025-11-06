@@ -298,7 +298,7 @@ export default function Project(): ReactNode {
 												</div>
 											</Link>
 										</div>
-										<div className="flex flex-col gap-2 max-h-[400px] hide-scroll">
+										<div className="flex flex-col gap-2 max-h-[400px] hide-scroll overflow-auto">
 											{dataController.projectsDataController
 												.getProject(project_id as string)
 												.notes.map((noteID, i) => (
