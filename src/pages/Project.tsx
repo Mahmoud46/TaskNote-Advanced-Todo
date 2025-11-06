@@ -225,7 +225,7 @@ export default function Project(): ReactNode {
 										<div className="flex items-center justify-between">
 											<h2 className="flex items-center text-lg gap-2">
 												<LuClipboardList className="text-xl" />{" "}
-												<span>Task</span>
+												<span>Tasks</span>
 											</h2>
 											<Link
 												to={`new-task?project_id=${project_id as string}`}
@@ -236,7 +236,7 @@ export default function Project(): ReactNode {
 												</div>
 											</Link>
 										</div>
-										<div className="flex flex-col gap-2 max-h-[400px] hide-scroll">
+										<div className="flex flex-col gap-2 max-h-[400px] overflow-auto hide-scroll">
 											{(
 												dataController.projectsDataController.getProject(
 													project_id as string
