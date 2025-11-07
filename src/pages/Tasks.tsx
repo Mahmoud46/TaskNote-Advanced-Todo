@@ -120,7 +120,12 @@ export default function Tasks(): ReactNode {
 									<div className="flex flex-col gap-2 flex-1 glass p-2 rounded-2xl">
 										<h2 className="flex gap-2 items-center">
 											<LuClipboardList className="text-xl" />{" "}
-											<span className="text-lg">All Tasks</span>
+											<span className="text-lg">
+												{taskPriority != "All"
+													? `${taskPriority}-priority`
+													: taskPriority}{" "}
+												Tasks
+											</span>
 										</h2>
 										<div className="flex flex-col max-w-[500px] gap-2 max-h-[450px] overflow-auto hide-scroll">
 											{dataController.tasksDataController.tasks

@@ -35,7 +35,7 @@ export default function NoteCard({ note }: { note: INote }) {
 				{!note.category && <LuFileText />}
 			</div>
 			<div className="flex-1 flex flex-col items-start">
-				<div className="flex items-center w-full justify-between gap-2">
+				<div className="flex items-start w-full justify-between gap-2">
 					<div className="">
 						<p
 							className={`overflow-hidden transition-all duration-300 ${

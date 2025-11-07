@@ -60,7 +60,7 @@ export default function TaskCard({ task }: { task: ITask }): ReactNode {
 				</label>
 			</div>
 			<div className="flex-1 flex flex-col items-start">
-				<div className="flex items-center gap-2 justify-between w-full">
+				<div className="flex items-start gap-2 justify-between w-full">
 					<div className="">
 						<p
 							className={`overflow-hidden transition-all duration-300 ${
