@@ -38,8 +38,8 @@ export default function ProjectsOverview(): ReactNode {
 									</div>
 									<div className="flex-1">
 										<p>{project.title}</p>
-										<div className="flex gap-4 items-center flex-wrap">
-											<p className="text-xs flex gap-1 items-center">
+										<div className="flex items-center flex-wrap">
+											<p className="text-xs flex gap-1 items-center  min-w-1/2">
 												<LuCalendarPlus className="text-sm" />
 												<span>
 													{new Date(project.start_date).toLocaleDateString(
@@ -52,7 +52,7 @@ export default function ProjectsOverview(): ReactNode {
 													)}
 												</span>
 											</p>
-											<p className="text-xs flex gap-1 items-center">
+											<p className="text-xs flex gap-1 items-center min-w-1/2">
 												<LuCalendarClock className="text-sm" />
 												<span>
 													{new Date(project.due_date).toLocaleDateString(
