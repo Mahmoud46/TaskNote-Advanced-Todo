@@ -21,7 +21,7 @@ export default function ActivityCard({ activity }: { activity: IActivity }) {
 				<ActivityIcon type={activity.type} action={activity.action} />
 			</div>
 			<div className="flex-1 flex flex-col items-start">
-				<div className="flex items-center w-full justify-between gap-2">
+				<div className="flex items-start w-full justify-between gap-2">
 					<div className="">
 						<p
 							className={`overflow-hidden transition-all duration-300 ${
