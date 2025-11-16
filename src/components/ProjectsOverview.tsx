@@ -38,7 +38,7 @@ export default function ProjectsOverview(): ReactNode {
 									</div>
 									<div className="flex-1">
 										<p>{project.title}</p>
-										<div className="flex gap-4 items-center">
+										<div className="flex gap-4 items-center flex-wrap">
 											<p className="text-xs flex gap-1 items-center">
 												<LuCalendarPlus className="text-sm" />
 												<span>
