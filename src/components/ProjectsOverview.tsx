@@ -26,7 +26,7 @@ export default function ProjectsOverview(): ReactNode {
 							.map((project, i) => (
 								<div
 									key={i}
-									className="glass flex items-center gap-2 p-2 rounded-xl rounded-tr-3xl"
+									className="glass flex items-start gap-2 p-2 rounded-xl rounded-tr-3xl"
 								>
 									<div className="text-xl mr-1">
 										{project.category && (
@@ -69,7 +69,7 @@ export default function ProjectsOverview(): ReactNode {
 									</div>
 									<Link
 										to={`projects/${project.project_id}`}
-										className="p-2 rounded-full glass w-fit cursor-pointer flex-none translate-x-1 -translate-y-1.5 transition duration-300 hover:-rotate-45"
+										className="p-2 rounded-full glass w-fit cursor-pointer flex-none translate-x-1 -translate-y-1 transition duration-300 hover:-rotate-45"
 									>
 										<LuArrowRight />
 									</Link>
