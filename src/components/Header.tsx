@@ -1,7 +1,7 @@
 import { type ReactNode } from "react";
-import { LuListTodo } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import ThemeButton from "./ThemeButton";
+import logo from "../assets/tasknote.svg";
 
 export default function Header(): ReactNode {
 	return (
@@ -11,8 +11,11 @@ export default function Header(): ReactNode {
 					to={"/"}
 					className="flex gap-2 p-2 cursor-pointer pl-4 items-center"
 				>
-					<LuListTodo className="text-xl" />
-					<p className="text-lg">TaskNote</p>
+					<img src={logo} alt="tasknote" className="h-4" />
+					<p className="text-lg font-semibold">
+						<span>Task</span>
+						<span className="italic">Note</span>
+					</p>
 				</Link>
 
 				<ThemeButton />
