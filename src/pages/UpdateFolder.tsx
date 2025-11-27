@@ -6,7 +6,7 @@ import {
 	LuPenLine,
 	LuX,
 } from "react-icons/lu";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import type { TCustomCategory } from "../interfaces/Data.interface";
 import { CUSTOME_CATEGRIES } from "../constants/data";
 import { CustomCategoryIcon } from "../libs/icons";
@@ -14,14 +14,14 @@ import { Context } from "../context/Context";
 import type { IContext } from "../interfaces/Context.interface";
 
 export default function UpdateFolder(): ReactNode {
-	const { dataController } = useContext(Context) as IContext;
+	const { dataController, prevPath, navigate } = useContext(
+		Context
+	) as IContext;
 	const { id } = useParams();
 
 	// Form
 	const [folderTitle, setFolderTitle] = useState<string>("");
 	const [folderCategory, setFolderCategory] = useState<TCustomCategory>("Work");
-
-	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (dataController.foldersDataController.includes(id as string)) {
@@ -43,10 +43,7 @@ export default function UpdateFolder(): ReactNode {
 							<LuFolderPen className="text-xl" />
 							<span className="">Update Folder</span>
 						</h1>
-						<Link
-							to={`${location.pathname.includes("folders") ? "/folders" : "/"}`}
-							className="glass p-1 rounded-full"
-						>
+						<Link to={prevPath} className="glass p-1 rounded-full">
 							<LuX />
 						</Link>
 					</div>
@@ -70,9 +67,7 @@ export default function UpdateFolder(): ReactNode {
 								updated_at: new Date().toISOString(),
 								category: folderCategory,
 							});
-							navigate(
-								`${location.pathname.includes("folders") ? "/folders" : "/"}`
-							);
+							navigate(prevPath);
 						}}
 					>
 						<div className="flex gap-2">
@@ -128,10 +123,7 @@ export default function UpdateFolder(): ReactNode {
 			{!dataController.foldersDataController.includes(id as string) && (
 				<div className="glass rounded-2xl max-h-[500px] overflow-auto flex flex-col gap-2 sm:w-[50%] p-2">
 					<div className="sticky top-0 z-40 flex w-full justify-end items-start">
-						<Link
-							to={`${location.pathname.includes("folders") ? "/folders" : "/"}`}
-							className="glass p-1 rounded-full"
-						>
+						<Link to={prevPath} className="glass p-1 rounded-full">
 							<LuX />
 						</Link>
 					</div>

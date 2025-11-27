@@ -22,18 +22,20 @@ import { Link, Outlet } from "react-router-dom";
 import RecentActivites from "../components/RecentActivites";
 
 export default function Home() {
-	const { dataController } = useContext(Context) as IContext;
+	const { dataController, setPrevPath, navigate } = useContext(
+		Context
+	) as IContext;
 	return (
 		<>
-			<div className="gap-2 rounded-2xl flex flex-col w-full pr-[360px] relative">
+			<div className="gap-2 rounded-2xl flex flex-col w-full lg:pr-[360px] relative">
 				<div className="flex glass p-2 flex-col w-full gap-2 rounded-2xl">
 					<StatsOverview />
 					<div className="flex items-start gap-2 flex-wrap">
 						<FoldersOverview />
 						<ProjectsOverview />
 					</div>
-					<div className="flex gap-2">
-						<div className="flex-1 relative min-h-[250px]">
+					<div className="flex gap-2 flex-wrap">
+						<div className="flex-1 relative min-h-[250px] min-w-[250px]">
 							<DailyActivityLineChart />
 						</div>
 						<OverviewPieChartContainer />
@@ -46,14 +48,17 @@ export default function Home() {
 								</h1>
 								{dataController.notesDataController.notes.length > 0 && (
 									<div className="flex items-center">
-										<Link
-											to="/new-note"
+										<div
+											onClick={() => {
+												setPrevPath("/");
+												navigate("/new-note");
+											}}
 											className="glass p-0.5 rounded-full flex-none group cursor-pointer"
 										>
 											<div className="p-2 text-lg transition duration-300 group-hover:bg-white group-hover:text-gray-900 rounded-full">
 												<LuFilePlus />
 											</div>
-										</Link>
+										</div>
 										<Link
 											to={"/notes"}
 											className="glass p-0.5 rounded-full flex-none group cursor-pointer"
@@ -79,8 +84,11 @@ export default function Home() {
 										There are currently no notes. Create one to begin.
 									</p>
 
-									<Link
-										to={"/new-note"}
+									<div
+										onClick={() => {
+											setPrevPath("/");
+											navigate("/new-note");
+										}}
 										className="flex items-center text-sm max-w-[2.5rem] overflow-hidden transition-all duration-300 group hover:max-w-[22rem] cursor-pointer"
 									>
 										<div className="glass p-0.5 rounded-full">
@@ -91,7 +99,7 @@ export default function Home() {
 										<span className="glass p-1 px-2 rounded-full opacity-0 transition duration-400 group-hover:opacity-100 w-max flex-none">
 											Add Note
 										</span>
-									</Link>
+									</div>
 								</div>
 							)}
 						</div>
@@ -102,14 +110,17 @@ export default function Home() {
 								</h1>
 								{dataController.tasksDataController.tasks.length > 0 && (
 									<div className="flex">
-										<Link
-											to={"/new-task"}
+										<div
+											onClick={() => {
+												setPrevPath("/");
+												navigate("/new-task");
+											}}
 											className="glass p-0.5 rounded-full flex-none group cursor-pointer"
 										>
 											<div className="p-2 text-lg transition duration-300 group-hover:bg-white group-hover:text-gray-900 rounded-full">
 												<LuClipboardPlus />
 											</div>
-										</Link>
+										</div>
 
 										<Link
 											to={"/tasks"}
@@ -136,8 +147,11 @@ export default function Home() {
 										There are currently no tasks. Create one to begin.
 									</p>
 
-									<Link
-										to={"/new-task"}
+									<div
+										onClick={() => {
+											setPrevPath("/");
+											navigate("/new-task");
+										}}
 										className="flex items-center text-sm max-w-[2.5rem] overflow-hidden transition-all duration-300 group hover:max-w-[22rem] cursor-pointer"
 									>
 										<div className="glass p-0.5 rounded-full">
@@ -148,14 +162,14 @@ export default function Home() {
 										<span className="glass p-1 px-2 rounded-full opacity-0 transition duration-400 group-hover:opacity-100 w-max flex-none">
 											Add Task
 										</span>
-									</Link>
+									</div>
 								</div>
 							)}
 						</div>
 					</div>
 				</div>
 
-				<div className="glass w-[350px] fixed right-8 p-2 rounded-2xl flex flex-col gap-2 max-h-[550px] overflow-auto hide-scroll">
+				<div className="glass w-[350px] fixed right-8 p-2 rounded-2xl hidden lg:flex flex-col gap-2 max-h-[550px] overflow-auto hide-scroll">
 					<NowDateTime />
 					{/* <div className="glass h-[200px] flex-none rounded-2xl p-2">
 						Calendar

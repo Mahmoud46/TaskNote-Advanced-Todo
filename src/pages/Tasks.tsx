@@ -1,5 +1,5 @@
 import { useContext, useState, type ReactNode } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { Context } from "../context/Context";
 import type { IContext } from "../interfaces/Context.interface";
 import {
@@ -19,7 +19,9 @@ import OverviewPieChartContainer from "../components/OverviewPieChartContainer";
 import { isInCurrentWeek, isToday } from "../libs/utils";
 
 export default function Tasks(): ReactNode {
-	const { dataController } = useContext(Context) as IContext;
+	const { dataController, setPrevPath, navigate } = useContext(
+		Context
+	) as IContext;
 	const [taskPriority, setTaskPriority] = useState<"All" | TTaskPriority>(
 		"All"
 	);
@@ -75,14 +77,17 @@ export default function Tasks(): ReactNode {
 										</option>
 									</select>
 								</div>
-								<Link
-									to={"new-task"}
+								<div
+									onClick={() => {
+										setPrevPath("/tasks");
+										navigate("/tasks/new-task");
+									}}
 									className="glass p-0.5 cursor-pointer rounded-full group"
 								>
 									<div className="p-2 transition duration-300 rounded-full group-hover:bg-white group-hover:text-gray-900">
 										<LuPlus className="text-lg" />
 									</div>
-								</Link>
+								</div>
 							</div>
 							<div className="flex w-full gap-2">
 								<div className="flex flex-col gap-2 w-[300px]">
@@ -180,8 +185,11 @@ export default function Tasks(): ReactNode {
 								There are currently no tasks. Create one to begin.
 							</p>
 
-							<Link
-								to={"new-task"}
+							<div
+								onClick={() => {
+									setPrevPath("/tasks");
+									navigate("/tasks/new-task");
+								}}
 								className="flex items-center text-sm max-w-[2.5rem] overflow-hidden transition-all duration-300 group hover:max-w-[22rem] cursor-pointer"
 							>
 								<div className="glass p-0.5 rounded-full">
@@ -192,7 +200,7 @@ export default function Tasks(): ReactNode {
 								<span className="glass p-1 px-2 rounded-full opacity-0 transition duration-400 group-hover:opacity-100 w-max flex-none">
 									Add Task
 								</span>
-							</Link>
+							</div>
 						</div>
 					)}
 				</div>

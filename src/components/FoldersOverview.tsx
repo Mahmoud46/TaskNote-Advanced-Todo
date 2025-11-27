@@ -11,7 +11,9 @@ import { CustomCategoryIcon } from "../libs/icons";
 import { Link } from "react-router-dom";
 
 export default function FoldersOverview(): ReactNode {
-	const { dataController } = useContext(Context) as IContext;
+	const { dataController, setPrevPath, navigate } = useContext(
+		Context
+	) as IContext;
 	return (
 		<div className="flex-1 flex flex-col gap-1 glass p-2 rounded-2xl">
 			<h1 className="font-semibold px-2">My Folders</h1>
@@ -67,14 +69,17 @@ export default function FoldersOverview(): ReactNode {
 							)}
 						</Link>
 
-						<Link
-							to={"/new-folder"}
+						<div
+							onClick={() => {
+								setPrevPath("/");
+								navigate("/new-folder");
+							}}
 							className="text-xl p-0.5 glass rounded-full group cursor-pointer"
 						>
 							<div className="p-2 transition-full duration-300 group-hover:bg-white group-hover:text-gray-900 rounded-full">
 								<LuFolderPlus />
 							</div>
-						</Link>
+						</div>
 					</div>
 				</div>
 			)}
@@ -85,8 +90,11 @@ export default function FoldersOverview(): ReactNode {
 						There are currently no folders. Create one to begin.
 					</p>
 
-					<Link
-						to={"/new-folder"}
+					<div
+						onClick={() => {
+							setPrevPath("/");
+							navigate("/new-folder");
+						}}
 						className="flex items-center text-sm max-w-[2.5rem] overflow-hidden transition-all duration-300 group hover:max-w-[22rem] cursor-pointer"
 					>
 						<div className="glass p-0.5 rounded-full">
@@ -97,7 +105,7 @@ export default function FoldersOverview(): ReactNode {
 						<span className="glass p-1 px-2 rounded-full opacity-0 transition duration-400 group-hover:opacity-100 w-max flex-none">
 							Add Folder
 						</span>
-					</Link>
+					</div>
 				</div>
 			)}
 		</div>

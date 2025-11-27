@@ -1,5 +1,5 @@
 import { useContext, useState, type ReactNode } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { Context } from "../context/Context";
 import type { IContext } from "../interfaces/Context.interface";
 import { LuFilter, LuPlus, LuRocket, LuSearch } from "react-icons/lu";
@@ -8,7 +8,9 @@ import { PROJECT_STATUS } from "../constants/data";
 import ProjectCard from "../components/ProjectCard";
 
 export default function Projects(): ReactNode {
-	const { dataController } = useContext(Context) as IContext;
+	const { dataController, setPrevPath, navigate } = useContext(
+		Context
+	) as IContext;
 	const [projectStatus, setProjectStatus] = useState<"All" | TProjectStatus>(
 		"All"
 	);
@@ -55,14 +57,17 @@ export default function Projects(): ReactNode {
 										))}
 									</select>
 								</div>
-								<Link
-									to={"new-project"}
+								<div
+									onClick={() => {
+										setPrevPath("/projects");
+										navigate("/projects/new-project");
+									}}
 									className="glass p-0.5 cursor-pointer rounded-full group"
 								>
 									<div className="p-2 transition duration-300 rounded-full group-hover:bg-white group-hover:text-gray-900">
 										<LuPlus className="text-lg" />
 									</div>
-								</Link>
+								</div>
 							</div>
 							<div className="grid-view">
 								{dataController.projectsDataController.projects
@@ -90,8 +95,11 @@ export default function Projects(): ReactNode {
 								There are currently no projects. Create one to begin.
 							</p>
 
-							<Link
-								to={"new-project"}
+							<div
+								onClick={() => {
+									setPrevPath("/projects");
+									navigate("/projects/new-project");
+								}}
 								className="flex items-center text-sm max-w-[2.5rem] overflow-hidden transition-all duration-300 group hover:max-w-[22rem] cursor-pointer"
 							>
 								<div className="glass p-0.5 rounded-full">
@@ -102,7 +110,7 @@ export default function Projects(): ReactNode {
 								<span className="glass p-1 px-2 rounded-full opacity-0 transition duration-400 group-hover:opacity-100 w-max flex-none">
 									Add Project
 								</span>
-							</Link>
+							</div>
 						</div>
 					)}
 				</div>

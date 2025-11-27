@@ -10,12 +10,7 @@ import {
 	LuRocket,
 	LuX,
 } from "react-icons/lu";
-import {
-	Link,
-	useLocation,
-	useNavigate,
-	useSearchParams,
-} from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import type {
 	IProject,
 	TCustomCategory,
@@ -31,7 +26,9 @@ export default function NewProject(): ReactNode {
 	const [searchParams] = useSearchParams();
 	const folderID = searchParams.get("folder_id");
 
-	const { dataController } = useContext(Context) as IContext;
+	const { dataController, prevPath, navigate } = useContext(
+		Context
+	) as IContext;
 	// Form
 	const [projectTitle, setProjectTitle] = useState<string>("");
 	const [projectStatus, setProjectStatus] = useState<TProjectStatus>("Pending");
@@ -41,8 +38,6 @@ export default function NewProject(): ReactNode {
 	const [projectCategory, setProjectCategory] =
 		useState<TCustomCategory>("Work");
 
-	const navigate = useNavigate();
-	const location = useLocation();
 	return (
 		<div className="fixed z-30 top-0 h-full w-full flex items-center justify-center -left-0">
 			<div className="glass p-2 rounded-2xl max-h-[500px] overflow-auto flex flex-col gap-2 sm:w-[50%]">
@@ -51,10 +46,7 @@ export default function NewProject(): ReactNode {
 						<LuRocket className="text-xl" />
 						<span className="">New Project</span>
 					</h1>
-					<Link
-						to={`${location.pathname.includes("projects") ? "/projects" : "/"}`}
-						className="glass p-1 rounded-full"
-					>
+					<Link to={prevPath} className="glass p-1 rounded-full">
 						<LuX />
 					</Link>
 				</div>
@@ -80,9 +72,7 @@ export default function NewProject(): ReactNode {
 						if (folderID) projectFormData.folder_id = folderID;
 						console.log(projectFormData);
 						dataController.createProject(projectFormData);
-						navigate(
-							`${location.pathname.includes("projects") ? "/projects" : "/"}`
-						);
+						navigate(prevPath);
 					}}
 				>
 					<div className="glass relative rounded-full text-sm flex-1">

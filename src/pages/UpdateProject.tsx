@@ -10,7 +10,7 @@ import {
 	LuRocket,
 	LuX,
 } from "react-icons/lu";
-import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import type {
 	TCustomCategory,
 	TProjectStatus,
@@ -21,7 +21,9 @@ import { Context } from "../context/Context";
 import type { IContext } from "../interfaces/Context.interface";
 
 export default function UpdateProject(): ReactNode {
-	const { dataController } = useContext(Context) as IContext;
+	const { dataController, prevPath, navigate } = useContext(
+		Context
+	) as IContext;
 	const { id } = useParams();
 	// Form
 	const [projectTitle, setProjectTitle] = useState<string>("");
@@ -31,9 +33,6 @@ export default function UpdateProject(): ReactNode {
 	const [projectDueDate, setProjectDueDate] = useState<string>("");
 	const [projectCategory, setProjectCategory] =
 		useState<TCustomCategory>("Work");
-
-	const navigate = useNavigate();
-	const location = useLocation();
 
 	useEffect(() => {
 		if (dataController.projectsDataController.includes(id as string)) {
@@ -68,10 +67,7 @@ export default function UpdateProject(): ReactNode {
 						<LuRocket className="text-xl" />
 						<span className="">Update Project</span>
 					</h1>
-					<Link
-						to={`${location.pathname.includes("projects") ? "/projects" : "/"}`}
-						className="glass p-1 rounded-full"
-					>
+					<Link to={prevPath} className="glass p-1 rounded-full">
 						<LuX />
 					</Link>
 				</div>
@@ -96,9 +92,7 @@ export default function UpdateProject(): ReactNode {
 							due_date: projectDueDate,
 							category: projectCategory,
 						});
-						navigate(
-							`${location.pathname.includes("projects") ? "/projects" : "/"}`
-						);
+						navigate(prevPath);
 					}}
 				>
 					<div className="glass relative rounded-full text-sm flex-1">

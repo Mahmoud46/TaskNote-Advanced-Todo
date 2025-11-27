@@ -1,5 +1,5 @@
 import { useContext, type ReactNode } from "react";
-import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
+import { Link, Outlet, useLocation, useParams } from "react-router-dom";
 import { Context } from "../context/Context";
 import type { IContext } from "../interfaces/Context.interface";
 import {
@@ -24,10 +24,11 @@ import TaskCard from "../components/TaskCard";
 import { CustomCategoryIcon } from "../libs/icons";
 
 export default function Folder(): ReactNode {
-	const { dataController } = useContext(Context) as IContext;
+	const { dataController, setPrevPath, navigate } = useContext(
+		Context
+	) as IContext;
 	const { folder_id } = useParams();
-	const navigate = useNavigate();
-
+	const location = useLocation();
 	return (
 		<div className="w-full relative">
 			<div className="flex flex-col gap-2 glass min-h-[85dvh] p-4 rounded-2xl w-full">
@@ -89,8 +90,13 @@ export default function Folder(): ReactNode {
 								</div>
 							</div>
 							<div className="flex items-center">
-								<Link
-									to={`update/${folder_id as string}`}
+								<div
+									onClick={() => {
+										setPrevPath(location.pathname);
+										navigate(
+											`${location.pathname}/update/${folder_id as string}`
+										);
+									}}
 									className="flex items-center text-sm max-w-[2.5rem] overflow-hidden transition-all duration-300 group hover:max-w-[22rem] cursor-pointer"
 								>
 									<div className="glass p-0.5 rounded-full">
@@ -101,7 +107,7 @@ export default function Folder(): ReactNode {
 									<span className="glass p-1 px-2 rounded-full opacity-0 transition duration-400 group-hover:opacity-100 w-max flex-none">
 										Edit
 									</span>
-								</Link>
+								</div>
 								<div
 									className="flex items-center text-sm max-w-[2.5rem] overflow-hidden transition-all duration-300 group hover:max-w-[22rem] cursor-pointer"
 									onClick={() => {
@@ -167,14 +173,21 @@ export default function Folder(): ReactNode {
 											<h2 className="flex items-center text-lg gap-2">
 												<LuRocket className="text-xl" /> <span>Projects</span>
 											</h2>
-											<Link
-												to={`new-project?folder_id=${folder_id as string}`}
+											<div
+												onClick={() => {
+													setPrevPath(location.pathname);
+													navigate(
+														`${location.pathname}/new-project?folder_id=${
+															folder_id as string
+														}`
+													);
+												}}
 												className="glass p-0.5 cursor-pointer rounded-full group"
 											>
 												<div className="p-2 transition duration-300 rounded-full group-hover:bg-white group-hover:text-gray-900">
 													<LuPlus className="text-lg" />
 												</div>
-											</Link>
+											</div>
 										</div>
 										<div className="flex flex-col gap-2 max-h-[400px] hide-scroll overflow-auto">
 											{dataController.foldersDataController
@@ -199,8 +212,15 @@ export default function Folder(): ReactNode {
 											There are currently no projects. Create one to begin.
 										</p>
 
-										<Link
-											to={`new-project?folder_id=${folder_id as string}`}
+										<div
+											onClick={() => {
+												setPrevPath(location.pathname);
+												navigate(
+													`${location.pathname}/new-project?folder_id=${
+														folder_id as string
+													}`
+												);
+											}}
 											className="flex items-center text-sm max-w-[2.5rem] overflow-hidden transition-all duration-300 group hover:max-w-[22rem] cursor-pointer"
 										>
 											<div className="glass p-0.5 rounded-full">
@@ -211,7 +231,7 @@ export default function Folder(): ReactNode {
 											<span className="glass p-1 px-2 rounded-full opacity-0 transition duration-400 group-hover:opacity-100 w-max flex-none">
 												Add Project
 											</span>
-										</Link>
+										</div>
 									</div>
 								)}
 							</div>
@@ -225,14 +245,21 @@ export default function Folder(): ReactNode {
 												<LuClipboardList className="text-xl" />{" "}
 												<span>Task</span>
 											</h2>
-											<Link
-												to={`new-task?folder_id=${folder_id as string}`}
+											<div
+												onClick={() => {
+													setPrevPath(location.pathname);
+													navigate(
+														`${location.pathname}/new-task?folder_id=${
+															folder_id as string
+														}`
+													);
+												}}
 												className="glass p-0.5 cursor-pointer rounded-full group"
 											>
 												<div className="p-2 transition duration-300 rounded-full group-hover:bg-white group-hover:text-gray-900">
 													<LuClipboardPlus className="text-lg" />
 												</div>
-											</Link>
+											</div>
 										</div>
 										<div className="flex flex-col gap-2 max-h-[400px] hide-scroll">
 											{dataController.foldersDataController
@@ -258,8 +285,15 @@ export default function Folder(): ReactNode {
 											There are currently no tasks. Create one to begin.
 										</p>
 
-										<Link
-											to={`new-task?folder_id=${folder_id as string}`}
+										<div
+											onClick={() => {
+												setPrevPath(location.pathname);
+												navigate(
+													`${location.pathname}/new-task?folder_id=${
+														folder_id as string
+													}`
+												);
+											}}
 											className="flex items-center text-sm max-w-[2.5rem] overflow-hidden transition-all duration-300 group hover:max-w-[22rem] cursor-pointer"
 										>
 											<div className="glass p-0.5 rounded-full">
@@ -270,7 +304,7 @@ export default function Folder(): ReactNode {
 											<span className="glass p-1 px-2 rounded-full opacity-0 transition duration-400 group-hover:opacity-100 w-max flex-none">
 												Add Task
 											</span>
-										</Link>
+										</div>
 									</div>
 								)}
 							</div>
@@ -283,14 +317,21 @@ export default function Folder(): ReactNode {
 											<h2 className="flex items-center text-lg gap-2">
 												<LuFileText className="text-xl" /> <span>Notes</span>
 											</h2>
-											<Link
-												to={`new-note?folder_id=${folder_id as string}`}
+											<div
+												onClick={() => {
+													setPrevPath(location.pathname);
+													navigate(
+														`${location.pathname}/new-note?folder_id=${
+															folder_id as string
+														}`
+													);
+												}}
 												className="glass p-0.5 cursor-pointer rounded-full group"
 											>
 												<div className="p-2 transition duration-300 rounded-full group-hover:bg-white group-hover:text-gray-900">
 													<LuFilePlus className="text-lg" />
 												</div>
-											</Link>
+											</div>
 										</div>
 										<div className="flex flex-col gap-2 max-h-[400px] hide-scroll">
 											{dataController.foldersDataController
@@ -315,8 +356,15 @@ export default function Folder(): ReactNode {
 											There are currently no notes. Create one to begin.
 										</p>
 
-										<Link
-											to={`new-note?folder_id=${folder_id as string}`}
+										<div
+											onClick={() => {
+												setPrevPath(location.pathname);
+												navigate(
+													`${location.pathname}/new-note?folder_id=${
+														folder_id as string
+													}`
+												);
+											}}
 											className="flex items-center text-sm max-w-[2.5rem] overflow-hidden transition-all duration-300 group hover:max-w-[22rem] cursor-pointer"
 										>
 											<div className="glass p-0.5 rounded-full">
@@ -327,7 +375,7 @@ export default function Folder(): ReactNode {
 											<span className="glass p-1 px-2 rounded-full opacity-0 transition duration-400 group-hover:opacity-100 w-max flex-none">
 												Add Note
 											</span>
-										</Link>
+										</div>
 									</div>
 								)}
 							</div>

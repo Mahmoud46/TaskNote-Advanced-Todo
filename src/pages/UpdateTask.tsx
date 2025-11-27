@@ -11,7 +11,7 @@ import {
 	LuPenLine,
 	LuX,
 } from "react-icons/lu";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import type {
 	TCustomCategory,
 	TTaskPriority,
@@ -24,7 +24,9 @@ import { Context } from "../context/Context";
 export default function UpdateTask(): ReactNode {
 	const { id } = useParams();
 
-	const { dataController } = useContext(Context) as IContext;
+	const { dataController, prevPath, navigate } = useContext(
+		Context
+	) as IContext;
 	const today = new Date().toISOString().split("T")[0];
 	// Form
 	const [taskTitle, setTaskTitle] = useState<string>("");
@@ -33,8 +35,6 @@ export default function UpdateTask(): ReactNode {
 	const [taskDueTime, setTaskDueTime] = useState<string>("");
 	const [taskCategory, setTaskCategory] = useState<TCustomCategory>("Work");
 	const [taskDescription, setTaskDescription] = useState<string>("");
-
-	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (dataController.tasksDataController.includes(id as string)) {
@@ -73,6 +73,7 @@ export default function UpdateTask(): ReactNode {
 			);
 		}
 	}, [id, dataController.tasksDataController]);
+
 	return (
 		<div className="fixed z-30 top-0 h-full w-full flex items-center justify-center -left-0">
 			{dataController.tasksDataController.includes(id as string) && (
@@ -82,10 +83,7 @@ export default function UpdateTask(): ReactNode {
 							<LuClipboardPen className="text-xl" />
 							<span className="">Update Task</span>
 						</h1>
-						<Link
-							to={`${location.pathname.includes("tasks") ? "/tasks" : "/"}`}
-							className="glass p-1 rounded-full"
-						>
+						<Link to={prevPath} className="glass p-1 rounded-full">
 							<LuX />
 						</Link>
 					</div>
@@ -106,9 +104,7 @@ export default function UpdateTask(): ReactNode {
 								updated_at: new Date().toISOString(),
 								category: taskCategory,
 							});
-							navigate(
-								`${location.pathname.includes("tasks") ? "/tasks" : "/"}`
-							);
+							navigate(prevPath);
 						}}
 					>
 						<div className="glass relative rounded-full text-sm">
@@ -240,7 +236,7 @@ export default function UpdateTask(): ReactNode {
 			{!dataController.tasksDataController.includes(id as string) && (
 				<div className="glass rounded-2xl max-h-[500px] overflow-auto flex flex-col gap-2 sm:w-[50%] p-2">
 					<div className="sticky top-0 z-40 flex w-full justify-end items-start">
-						<Link to={"/"} className="glass p-1 rounded-full">
+						<Link to={prevPath} className="glass p-1 rounded-full">
 							<LuX />
 						</Link>
 					</div>

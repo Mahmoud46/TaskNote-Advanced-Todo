@@ -11,14 +11,17 @@ import {
 import type { INote } from "../interfaces/Data.interface";
 import { useContext, useEffect, useState } from "react";
 import { CustomCategoryIcon } from "../libs/icons";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { Context } from "../context/Context";
 import type { IContext } from "../interfaces/Context.interface";
 
 export default function NoteCard({ note }: { note: INote }) {
-	const { dataController } = useContext(Context) as IContext;
+	const { dataController, setPrevPath, navigate } = useContext(
+		Context
+	) as IContext;
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [content, setContent] = useState<string>("");
+	const location = useLocation();
 
 	useEffect(() => {
 		setContent(note.content);
@@ -70,12 +73,15 @@ export default function NoteCard({ note }: { note: INote }) {
 						</div>
 					</div>
 					<div className="flex glass rounded-full p-0.5 mt-0.5">
-						<Link
-							to={`update-note/${note.note_id}`}
+						<div
+							onClick={() => {
+								setPrevPath(location.pathname);
+								navigate(`${location.pathname}/update-note/${note.note_id}`);
+							}}
 							className="p-2 text-sm cursor-pointer transition duration-300 hover:bg-white hover:text-gray-900 rounded-full"
 						>
 							<LuPenLine />
-						</Link>
+						</div>
 						<div
 							className="p-2 text-sm cursor-pointer transition duration-300 hover:bg-white hover:text-gray-900 rounded-full"
 							onClick={() => dataController.deleteNote(note.note_id)}

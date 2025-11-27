@@ -14,14 +14,17 @@ import {
 import type { ITask } from "../interfaces/Data.interface";
 import { Context } from "../context/Context";
 import type { IContext } from "../interfaces/Context.interface";
-import { Link } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export default function TaskCard({ task }: { task: ITask }): ReactNode {
-	const { dataController } = useContext(Context) as IContext;
+	const { dataController, setPrevPath, navigate } = useContext(
+		Context
+	) as IContext;
 
 	const [isDone, setIsDone] = useState<boolean>(task.is_done);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const [description, setDescription] = useState<string>("");
+	const location = useLocation();
 
 	useEffect(() => {
 		setIsDone(task.is_done);
@@ -95,12 +98,15 @@ export default function TaskCard({ task }: { task: ITask }): ReactNode {
 						</div>
 					</div>
 					<div className="flex glass rounded-full p-0.5 mt-0.5">
-						<Link
-							to={`update-task/${task.task_id}`}
+						<div
+							onClick={() => {
+								setPrevPath(location.pathname);
+								navigate(`${location.pathname}/update-task/${task.task_id}`);
+							}}
 							className="p-2 text-sm cursor-pointer transition duration-300 hover:bg-white hover:text-gray-900 rounded-full"
 						>
 							<LuPenLine />
-						</Link>
+						</div>
 						<div
 							className="p-2 text-sm cursor-pointer transition duration-300 hover:bg-white hover:text-gray-900 rounded-full"
 							onClick={() => dataController.deleteTask(task.task_id)}

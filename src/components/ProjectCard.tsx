@@ -15,14 +15,17 @@ import {
 } from "react-icons/lu";
 import { Context } from "../context/Context";
 import type { IContext } from "../interfaces/Context.interface";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 export default function ProjectCard({
 	project,
 }: {
 	project: IProject;
 }): ReactNode {
-	const { dataController } = useContext(Context) as IContext;
+	const { dataController, setPrevPath, navigate } = useContext(
+		Context
+	) as IContext;
+	const location = useLocation();
 	return (
 		<div className="flex items-start glass rounded-xl p-0.5 rounded-tr-3xl w-full">
 			<div className="p-2 flex gap-2 flex-col flex-1 flex-wrap">
@@ -99,12 +102,17 @@ export default function ProjectCard({
 				>
 					<LuTrash />
 				</div>
-				<Link
-					to={`update-project/${project.project_id}`}
+				<div
+					onClick={() => {
+						setPrevPath(location.pathname);
+						navigate(
+							`${location.pathname}/update-project/${project.project_id}`
+						);
+					}}
 					className="p-2 rounded-full w-fit cursor-pointer flex-none transition duration-300 hover:bg-white hover:text-gray-900"
 				>
 					<LuPenLine />
-				</Link>
+				</div>
 
 				<Link
 					to={`/projects/${project.project_id}`}

@@ -6,7 +6,7 @@ import {
 	LuPlus,
 	LuX,
 } from "react-icons/lu";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import type { INote, TCustomCategory } from "../interfaces/Data.interface";
 import { CustomCategoryIcon } from "../libs/icons";
 import { CUSTOME_CATEGRIES } from "../constants/data";
@@ -19,14 +19,14 @@ export default function NewNote(): ReactNode {
 	const folderID = searchParams.get("folder_id");
 	const projectID = searchParams.get("project_id");
 
-	const { dataController } = useContext(Context) as IContext;
+	const { dataController, prevPath, navigate } = useContext(
+		Context
+	) as IContext;
 
 	// Form
 	const [noteTitle, setNoteTitle] = useState<string>("");
 	const [noteCategory, setNoteCategory] = useState<TCustomCategory>("Work");
 	const [noteContent, setNoteContent] = useState<string>("");
-
-	const navigate = useNavigate();
 	return (
 		<div className="fixed z-30 top-0 h-full w-full flex items-center justify-center -left-0">
 			<div className="glass p-2 rounded-2xl max-h-[500px] overflow-auto flex flex-col gap-2 sm:w-[50%]">
@@ -35,10 +35,7 @@ export default function NewNote(): ReactNode {
 						<LuFilePlus className="text-xl" />
 						<span className="">New Note</span>
 					</h1>
-					<Link
-						to={`${location.pathname.includes("notes") ? "/notes" : "/"}`}
-						className="glass p-1 rounded-full"
-					>
+					<Link to={prevPath} className="glass p-1 rounded-full">
 						<LuX />
 					</Link>
 				</div>
@@ -62,7 +59,7 @@ export default function NewNote(): ReactNode {
 						if (projectID) noteFormData.project_id = projectID;
 
 						dataController.createNote(noteFormData);
-						navigate(`${location.pathname.includes("notes") ? "/notes" : "/"}`);
+						navigate(prevPath);
 					}}
 				>
 					<div className="flex gap-2">

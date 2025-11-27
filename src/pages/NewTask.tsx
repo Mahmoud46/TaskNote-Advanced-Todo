@@ -10,7 +10,7 @@ import {
 	LuPlus,
 	LuX,
 } from "react-icons/lu";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import type {
 	ITask,
 	TCustomCategory,
@@ -27,7 +27,9 @@ export default function NewTask(): ReactNode {
 	const folderID = searchParams.get("folder_id");
 	const projectID = searchParams.get("project_id");
 
-	const { dataController } = useContext(Context) as IContext;
+	const { dataController, prevPath, navigate } = useContext(
+		Context
+	) as IContext;
 	const today = new Date().toISOString().split("T")[0];
 	// Form
 	const [taskTitle, setTaskTitle] = useState<string>("");
@@ -37,7 +39,6 @@ export default function NewTask(): ReactNode {
 	const [taskCategory, setTaskCategory] = useState<TCustomCategory>("Work");
 	const [taskDescription, setTaskDescription] = useState<string>("");
 
-	const navigate = useNavigate();
 	return (
 		<div className="fixed z-30 top-0 h-full w-full flex items-center justify-center -left-0">
 			<div className="glass p-2 rounded-2xl max-h-[500px] overflow-auto flex flex-col gap-2 sm:w-[50%]">
@@ -46,10 +47,7 @@ export default function NewTask(): ReactNode {
 						<LuClipboardPlus className="text-xl" />
 						<span className="">New Task</span>
 					</h1>
-					<Link
-						to={`${location.pathname.includes("tasks") ? "/tasks" : "/"}`}
-						className="glass p-1 rounded-full"
-					>
+					<Link to={prevPath} className="glass p-1 rounded-full">
 						<LuX />
 					</Link>
 				</div>
@@ -76,7 +74,7 @@ export default function NewTask(): ReactNode {
 						if (projectID) taskFormData.project_id = projectID;
 
 						dataController.createTask(taskFormData);
-						navigate(`${location.pathname.includes("tasks") ? "/tasks" : "/"}`);
+						navigate(prevPath);
 					}}
 				>
 					<div className="glass relative rounded-full text-sm">

@@ -1,6 +1,6 @@
 import { useContext, useState, type ReactNode } from "react";
 import { LuFolder, LuFolderPlus, LuPlus, LuX } from "react-icons/lu";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import type { TCustomCategory } from "../interfaces/Data.interface";
 import { CUSTOME_CATEGRIES } from "../constants/data";
 import { nanoid } from "nanoid";
@@ -9,14 +9,14 @@ import { Context } from "../context/Context";
 import type { IContext } from "../interfaces/Context.interface";
 
 export default function NewFolder(): ReactNode {
-	const { dataController } = useContext(Context) as IContext;
+	const { dataController, prevPath, navigate } = useContext(
+		Context
+	) as IContext;
 
 	// Form
 	const [folderTitle, setFolderTitle] = useState<string>("");
 	const [folderCategory, setFolderCategory] = useState<TCustomCategory>("Work");
 
-	const navigate = useNavigate();
-	const location = useLocation();
 	return (
 		<div className="fixed z-30 top-0 h-full w-full flex items-center justify-center -left-0">
 			<div className="glass p-2 rounded-2xl max-h-[500px] overflow-auto flex flex-col gap-2 sm:w-[50%]">
@@ -25,10 +25,7 @@ export default function NewFolder(): ReactNode {
 						<LuFolderPlus className="text-xl" />
 						<span className="">New Folder</span>
 					</h1>
-					<Link
-						to={`${location.pathname.includes("folders") ? "/folders" : "/"}`}
-						className="glass p-1 rounded-full"
-					>
+					<Link to={prevPath} className="glass p-1 rounded-full">
 						<LuX />
 					</Link>
 				</div>
@@ -47,9 +44,7 @@ export default function NewFolder(): ReactNode {
 							category: folderCategory,
 						});
 
-						navigate(
-							`${location.pathname.includes("folders") ? "/folders" : "/"}`
-						);
+						navigate(prevPath);
 					}}
 				>
 					<div className="flex gap-2">

@@ -20,7 +20,9 @@ import {
 import { CustomCategoryIcon } from "../libs/icons";
 
 export default function Folders(): ReactNode {
-	const { dataController } = useContext(Context) as IContext;
+	const { dataController, setPrevPath, navigate } = useContext(
+		Context
+	) as IContext;
 	const [searchTitle, setSearchTitle] = useState<string>("");
 	return (
 		<>
@@ -43,14 +45,17 @@ export default function Folders(): ReactNode {
 									/>
 								</div>
 
-								<Link
-									to={"new-folder"}
+								<div
+									onClick={() => {
+										setPrevPath("/folders");
+										navigate(`/folders/new-folder`);
+									}}
 									className="glass p-0.5 cursor-pointer rounded-full group"
 								>
 									<div className="p-2 transition duration-300 rounded-full group-hover:bg-white group-hover:text-gray-900">
 										<LuPlus className="text-lg" />
 									</div>
-								</Link>
+								</div>
 							</div>
 							<div className="grid gap-2 grid-cols-[repeat(auto-fill,minmax(180px,1fr))]">
 								{dataController.foldersDataController.folders
@@ -67,12 +72,17 @@ export default function Folders(): ReactNode {
 											className="flex flex-col justify-between glass rounded-xl p-0.5 rounded-tr-3xl h-[150px]"
 										>
 											<div className="flex glass w-fit self-end rounded-full -translate-x-0.5 translate-y-0.5 p-0.5">
-												<Link
-													to={`update-folder/${folder.folder_id}`}
+												<div
+													onClick={() => {
+														setPrevPath("/folders");
+														navigate(
+															`/folders/update-folder/${folder.folder_id}`
+														);
+													}}
 													className="p-2 rounded-full w-fit cursor-pointer flex-none transition duration-300 hover:bg-white hover:text-gray-900"
 												>
 													<LuPenLine />
-												</Link>
+												</div>
 
 												<div
 													className="p-2 rounded-full w-fit cursor-pointer flex-none transition duration-300 hover:bg-white hover:text-gray-900"
@@ -161,8 +171,11 @@ export default function Folders(): ReactNode {
 								There are currently no folders. Create one to begin.
 							</p>
 
-							<Link
-								to={"new-folder"}
+							<div
+								onClick={() => {
+									setPrevPath("/folders");
+									navigate("/folders/new-folder");
+								}}
 								className="flex items-center text-sm max-w-[2.5rem] overflow-hidden transition-all duration-300 group hover:max-w-[22rem] cursor-pointer"
 							>
 								<div className="glass p-0.5 rounded-full">
@@ -173,7 +186,7 @@ export default function Folders(): ReactNode {
 								<span className="glass p-1 px-2 rounded-full opacity-0 transition duration-400 group-hover:opacity-100 w-max flex-none">
 									Add Folder
 								</span>
-							</Link>
+							</div>
 						</div>
 					)}
 				</div>

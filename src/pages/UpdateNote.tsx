@@ -7,7 +7,7 @@ import {
 	LuPenLine,
 	LuX,
 } from "react-icons/lu";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import type { TCustomCategory } from "../interfaces/Data.interface";
 import { CustomCategoryIcon } from "../libs/icons";
 import { CUSTOME_CATEGRIES } from "../constants/data";
@@ -17,13 +17,13 @@ import type { IContext } from "../interfaces/Context.interface";
 export default function UpdateNote(): ReactNode {
 	const { id } = useParams();
 
-	const { dataController } = useContext(Context) as IContext;
+	const { dataController, prevPath, navigate } = useContext(
+		Context
+	) as IContext;
 	// Form
 	const [noteTitle, setNoteTitle] = useState<string>("");
 	const [noteCategory, setNoteCategory] = useState<TCustomCategory>("Work");
 	const [noteContent, setNoteContent] = useState<string>("");
-
-	const navigate = useNavigate();
 
 	useEffect(() => {
 		if (dataController.notesDataController.includes(id as string)) {
@@ -48,10 +48,7 @@ export default function UpdateNote(): ReactNode {
 							<LuFilePen className="text-xl" />
 							<span className="">Update Note</span>
 						</h1>
-						<Link
-							to={`${location.pathname.includes("notes") ? "/notes" : "/"}`}
-							className="glass p-1 rounded-full"
-						>
+						<Link to={prevPath} className="glass p-1 rounded-full">
 							<LuX />
 						</Link>
 					</div>
@@ -69,9 +66,7 @@ export default function UpdateNote(): ReactNode {
 								updated_at: new Date().toISOString(),
 								category: noteCategory,
 							});
-							navigate(
-								`${location.pathname.includes("notes") ? "/notes" : "/"}`
-							);
+							navigate(prevPath);
 						}}
 					>
 						<div className="flex gap-2">
@@ -139,7 +134,7 @@ export default function UpdateNote(): ReactNode {
 			{!dataController.notesDataController.includes(id as string) && (
 				<div className="glass rounded-2xl max-h-[500px] overflow-auto flex flex-col gap-2 sm:w-[50%] p-2">
 					<div className="sticky top-0 z-40 flex w-full justify-end items-start">
-						<Link to={"/"} className="glass p-1 rounded-full">
+						<Link to={prevPath} className="glass p-1 rounded-full">
 							<LuX />
 						</Link>
 					</div>

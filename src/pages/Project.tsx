@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState, type ReactNode } from "react";
-import { Link, Outlet, useNavigate, useParams } from "react-router-dom";
+import { Link, Outlet, useLocation, useParams } from "react-router-dom";
 import { Context } from "../context/Context";
 import type { IContext } from "../interfaces/Context.interface";
 import {
@@ -26,11 +26,12 @@ import { getProgressPercentageWithRespect2Date } from "../libs/utils";
 import { PROJECT_STATUS_COLOR, PROJECT_STATUS_MAP } from "../constants/data";
 
 export default function Project(): ReactNode {
-	const { dataController } = useContext(Context) as IContext;
+	const { dataController, setPrevPath, navigate } = useContext(
+		Context
+	) as IContext;
 	const { project_id } = useParams();
-	const navigate = useNavigate();
 	const [description, setDescription] = useState<string>("");
-
+	const location = useLocation();
 	useEffect(() => {
 		if (dataController.projectsDataController.includes(project_id as string))
 			setDescription(
@@ -116,8 +117,13 @@ export default function Project(): ReactNode {
 								</div>
 							</div>
 							<div className="flex items-center">
-								<Link
-									to={`update/${project_id as string}`}
+								<div
+									onClick={() => {
+										setPrevPath(location.pathname);
+										navigate(
+											`${location.pathname}/update/${project_id as string}`
+										);
+									}}
 									className="flex items-center text-sm max-w-[2.5rem] overflow-hidden transition-all duration-300 group hover:max-w-[22rem] cursor-pointer"
 								>
 									<div className="glass p-0.5 rounded-full">
@@ -128,7 +134,7 @@ export default function Project(): ReactNode {
 									<span className="glass p-1 px-2 rounded-full opacity-0 transition duration-400 group-hover:opacity-100 w-max flex-none">
 										Edit
 									</span>
-								</Link>
+								</div>
 								<div
 									className="flex items-center text-sm max-w-[2.5rem] overflow-hidden transition-all duration-300 group hover:max-w-[22rem] cursor-pointer"
 									onClick={() => {
@@ -227,14 +233,21 @@ export default function Project(): ReactNode {
 												<LuClipboardList className="text-xl" />{" "}
 												<span>Tasks</span>
 											</h2>
-											<Link
-												to={`new-task?project_id=${project_id as string}`}
+											<div
+												onClick={() => {
+													setPrevPath(location.pathname);
+													navigate(
+														`${location.pathname}/new-task?project_id=${
+															project_id as string
+														}`
+													);
+												}}
 												className="glass p-0.5 cursor-pointer rounded-full group"
 											>
 												<div className="p-2 transition duration-300 rounded-full group-hover:bg-white group-hover:text-gray-900">
 													<LuClipboardPlus className="text-lg" />
 												</div>
-											</Link>
+											</div>
 										</div>
 										<div className="flex flex-col gap-2 max-h-[400px] overflow-auto hide-scroll">
 											{(
@@ -264,8 +277,15 @@ export default function Project(): ReactNode {
 											There are currently no tasks. Create one to begin.
 										</p>
 
-										<Link
-											to={`new-task?project_id=${project_id as string}`}
+										<div
+											onClick={() => {
+												setPrevPath(location.pathname);
+												navigate(
+													`${location.pathname}/new-task?project_id=${
+														project_id as string
+													}`
+												);
+											}}
 											className="flex items-center text-sm max-w-[2.5rem] overflow-hidden transition-all duration-300 group hover:max-w-[22rem] cursor-pointer"
 										>
 											<div className="glass p-0.5 rounded-full">
@@ -276,7 +296,7 @@ export default function Project(): ReactNode {
 											<span className="glass p-1 px-2 rounded-full opacity-0 transition duration-400 group-hover:opacity-100 w-max flex-none">
 												Add Task
 											</span>
-										</Link>
+										</div>
 									</div>
 								)}
 							</div>
@@ -289,14 +309,21 @@ export default function Project(): ReactNode {
 											<h2 className="flex items-center text-lg gap-2">
 												<LuFileText className="text-xl" /> <span>Notes</span>
 											</h2>
-											<Link
-												to={`new-note?project_id=${project_id as string}`}
+											<div
+												onClick={() => {
+													setPrevPath(location.pathname);
+													navigate(
+														`${location.pathname}/new-note?project_id=${
+															project_id as string
+														}`
+													);
+												}}
 												className="glass p-0.5 cursor-pointer rounded-full group"
 											>
 												<div className="p-2 transition duration-300 rounded-full group-hover:bg-white group-hover:text-gray-900">
 													<LuFilePlus className="text-lg" />
 												</div>
-											</Link>
+											</div>
 										</div>
 										<div className="flex flex-col gap-2 max-h-[400px] hide-scroll overflow-auto">
 											{dataController.projectsDataController
@@ -321,8 +348,15 @@ export default function Project(): ReactNode {
 											There are currently no notes. Create one to begin.
 										</p>
 
-										<Link
-											to={`new-note?project_id=${project_id as string}`}
+										<div
+											onClick={() => {
+												setPrevPath(location.pathname);
+												navigate(
+													`${location.pathname}/new-note?project_id=${
+														project_id as string
+													}`
+												);
+											}}
 											className="flex items-center text-sm max-w-[2.5rem] overflow-hidden transition-all duration-300 group hover:max-w-[22rem] cursor-pointer"
 										>
 											<div className="glass p-0.5 rounded-full">
@@ -333,7 +367,7 @@ export default function Project(): ReactNode {
 											<span className="glass p-1 px-2 rounded-full opacity-0 transition duration-400 group-hover:opacity-100 w-max flex-none">
 												Add Note
 											</span>
-										</Link>
+										</div>
 									</div>
 								)}
 							</div>

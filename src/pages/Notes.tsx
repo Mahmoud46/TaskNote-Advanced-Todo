@@ -1,5 +1,5 @@
 import { useContext, useState, type ReactNode } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { Context } from "../context/Context";
 import type { IContext } from "../interfaces/Context.interface";
 import {
@@ -18,7 +18,9 @@ import NoteCard from "../components/NoteCard";
 import HorizontalBarChart from "../components/HorizontalBarChart";
 
 export default function Notes(): ReactNode {
-	const { dataController } = useContext(Context) as IContext;
+	const { dataController, setPrevPath, navigate } = useContext(
+		Context
+	) as IContext;
 	const [catStatus, setCatStatus] = useState<"All" | TCustomCategory>("All");
 	const [searchTitle, setSearchTitle] = useState<string>("");
 	return (
@@ -69,14 +71,17 @@ export default function Notes(): ReactNode {
 										))}
 									</select>
 								</div>
-								<Link
-									to={"new-note"}
+								<div
+									onClick={() => {
+										setPrevPath("/notes");
+										navigate("/notes/new-note");
+									}}
 									className="glass p-0.5 cursor-pointer rounded-full group"
 								>
 									<div className="p-2 transition duration-300 rounded-full group-hover:bg-white group-hover:text-gray-900">
 										<LuPlus className="text-lg" />
 									</div>
-								</Link>
+								</div>
 							</div>
 							<div className="flex w-full gap-2">
 								<div className="w-[300px]">
@@ -174,8 +179,11 @@ export default function Notes(): ReactNode {
 								There are currently no notes. Create one to begin.
 							</p>
 
-							<Link
-								to={"new-note"}
+							<div
+								onClick={() => {
+									setPrevPath("/notes");
+									navigate("/notes/new-note");
+								}}
 								className="flex items-center text-sm max-w-[2.5rem] overflow-hidden transition-all duration-300 group hover:max-w-[22rem] cursor-pointer"
 							>
 								<div className="glass p-0.5 rounded-full">
@@ -186,7 +194,7 @@ export default function Notes(): ReactNode {
 								<span className="glass p-1 px-2 rounded-full opacity-0 transition duration-400 group-hover:opacity-100 w-max flex-none">
 									Add Note
 								</span>
-							</Link>
+							</div>
 						</div>
 					)}
 				</div>
