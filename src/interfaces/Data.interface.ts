@@ -24,7 +24,7 @@ export interface IProject {
 	description: string;
 	tasks: string[]; // Tasks IDs
 	notes: string[]; // Notes IDs
-
+	links?: string[];
 	start_date: string;
 	due_date: string;
 	created_at: string;

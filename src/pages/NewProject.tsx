@@ -21,6 +21,7 @@ import { nanoid } from "nanoid";
 import { CustomCategoryIcon } from "../libs/icons";
 import { Context } from "../context/Context";
 import type { IContext } from "../interfaces/Context.interface";
+import { extractLinks, replaceLinksInSentence } from "../libs/utils";
 
 export default function NewProject(): ReactNode {
 	const [searchParams] = useSearchParams();
@@ -70,6 +71,14 @@ export default function NewProject(): ReactNode {
 						};
 
 						if (folderID) projectFormData.folder_id = folderID;
+						if (projectDescription) {
+							projectFormData.links = extractLinks(projectDescription);
+							projectFormData.description = replaceLinksInSentence(
+								projectFormData.description,
+								projectFormData.links
+							);
+						}
+
 						console.log(projectFormData);
 						dataController.createProject(projectFormData);
 						navigate(prevPath);
@@ -159,7 +168,6 @@ export default function NewProject(): ReactNode {
 							</select>
 						</div>
 					</div>
-
 					<div className="w-full glass relative rounded-2xl text-sm">
 						<LuNotebook
 							className={"opacity-70 absolute left-2 top-2.5 text-base"}

@@ -63,6 +63,13 @@ import type {
 } from "../interfaces/Data.interface";
 import type { ReactNode } from "react";
 import type { TStat } from "../classes/Data.class";
+import {
+	SiFacebook,
+	SiInstagram,
+	SiLinkedin,
+	SiUdemy,
+	SiYoutube,
+} from "react-icons/si";
 
 export function CustomCategoryIcon({
 	category,
@@ -230,5 +237,26 @@ export function ActivityIcon({
 	}
 }
 
-// "created" | "updated" | "deleted" | "completed"
-// "task" | "project" | "note" | "folder"
+export const Icon = ({
+	content,
+	className = "",
+}: {
+	content: string;
+	className?: string;
+}): ReactNode => {
+	switch (content) {
+		case "udemy":
+			return <SiUdemy className={className} />;
+		case "linkedin":
+			return <SiLinkedin className={className} />;
+		case "facebook":
+			return <SiFacebook className={className} />;
+		case "youtube":
+			return <SiYoutube className={className} />;
+		case "instagram":
+			return <SiInstagram className={className} />;
+
+		default:
+			return <LuGlobe className={className} />;
+	}
+};

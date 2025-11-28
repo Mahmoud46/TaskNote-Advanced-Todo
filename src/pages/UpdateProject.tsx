@@ -12,6 +12,7 @@ import {
 } from "react-icons/lu";
 import { Link, useParams } from "react-router-dom";
 import type {
+	IProject,
 	TCustomCategory,
 	TProjectStatus,
 } from "../interfaces/Data.interface";
@@ -19,6 +20,7 @@ import { CUSTOME_CATEGRIES, PROJECT_STATUS } from "../constants/data";
 import { CustomCategoryIcon } from "../libs/icons";
 import { Context } from "../context/Context";
 import type { IContext } from "../interfaces/Context.interface";
+import { extractLinks, replaceLinksInSentence } from "../libs/utils";
 
 export default function UpdateProject(): ReactNode {
 	const { dataController, prevPath, navigate } = useContext(
@@ -76,7 +78,8 @@ export default function UpdateProject(): ReactNode {
 					className="p-2 flex flex-col gap-2"
 					onSubmit={(e) => {
 						e.preventDefault();
-						dataController.updateProject({
+
+						const projectFormData: IProject = {
 							...dataController.projectsDataController.getProject(id as string),
 							status: projectStatus,
 							title: projectTitle,
@@ -91,7 +94,24 @@ export default function UpdateProject(): ReactNode {
 							start_date: projectStartDate,
 							due_date: projectDueDate,
 							category: projectCategory,
-						});
+						};
+
+						if (projectFormData.description) {
+							if (projectFormData.links)
+								projectFormData.links = [
+									...new Set([
+										...projectFormData.links,
+										...extractLinks(projectDescription),
+									]),
+								];
+							else projectFormData.links = extractLinks(projectDescription);
+							projectFormData.description = replaceLinksInSentence(
+								projectFormData.description,
+								projectFormData.links
+							);
+						}
+
+						dataController.updateProject(projectFormData);
 						navigate(prevPath);
 					}}
 				>

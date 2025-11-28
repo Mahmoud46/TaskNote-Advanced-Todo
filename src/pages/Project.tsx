@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, type ReactNode } from "react";
+import { useContext, type ReactNode } from "react";
 import { Link, Outlet, useLocation, useParams } from "react-router-dom";
 import { Context } from "../context/Context";
 import type { IContext } from "../interfaces/Context.interface";
@@ -20,9 +20,12 @@ import {
 
 import NoteCard from "../components/NoteCard";
 import TaskCard from "../components/TaskCard";
-import { CustomCategoryIcon } from "../libs/icons";
+import { CustomCategoryIcon, Icon } from "../libs/icons";
 import CircularProgressPieChart from "../components/CircularProgressPieChart";
-import { getProgressPercentageWithRespect2Date } from "../libs/utils";
+import {
+	getPlatformName,
+	getProgressPercentageWithRespect2Date,
+} from "../libs/utils";
 import { PROJECT_STATUS_COLOR, PROJECT_STATUS_MAP } from "../constants/data";
 
 export default function Project(): ReactNode {
@@ -30,15 +33,8 @@ export default function Project(): ReactNode {
 		Context
 	) as IContext;
 	const { project_id } = useParams();
-	const [description, setDescription] = useState<string>("");
+
 	const location = useLocation();
-	useEffect(() => {
-		if (dataController.projectsDataController.includes(project_id as string))
-			setDescription(
-				dataController.projectsDataController.getProject(project_id as string)
-					.description
-			);
-	}, [project_id, dataController.projectsDataController]);
 
 	return (
 		<div className="w-full relative">
@@ -164,19 +160,43 @@ export default function Project(): ReactNode {
 											<LuNotebook className="text-sm" />
 											<span>Description</span>
 										</p>
-										<textarea
-											readOnly
-											className="w-full outline-0 resize-none text-sm pl-5 overflow-hidden"
-											value={description}
-											ref={(el) => {
-												if (el) {
-													el.style.height = "auto";
-													el.style.height = el.scrollHeight + "px";
-												}
-											}}
-										>
-											{description}
-										</textarea>
+										<p className="w-full text-sm pl-5 overflow-hidden wrap-break-word">
+											{
+												dataController.projectsDataController.getProject(
+													project_id as string
+												).description
+											}
+										</p>
+
+										{dataController.projectsDataController.getProject(
+											project_id as string
+										).links &&
+											(
+												dataController.projectsDataController.getProject(
+													project_id as string
+												).links as []
+											).length > 0 && (
+												<div className="flex justify-end mt-2 items-center gap-1">
+													{(
+														dataController.projectsDataController.getProject(
+															project_id as string
+														).links as string[]
+													).map((link, i) => (
+														<a
+															href={link}
+															key={i}
+															className="flex items-center gap-1 text-xs glass p-1 rounded-full px-2"
+															target="_blank"
+														>
+															<Icon
+																content={getPlatformName(link).toLowerCase()}
+																className="text-sm"
+															/>
+															<p>{getPlatformName(link)}</p>
+														</a>
+													))}
+												</div>
+											)}
 									</div>
 								)}
 								<div className="w-full h-[280px] relative">

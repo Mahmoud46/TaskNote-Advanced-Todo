@@ -59,3 +59,30 @@ export function getProgressColor(progress: number): string {
 	if (progress < 75) return "#60a5fa"; // blue
 	return "#4ade80"; // green
 }
+
+export function extractLinks(text: string): string[] {
+	return text.match(/https?:\/\/[^\s]+/g) || [];
+}
+
+export function replaceLinksInSentence(
+	sentence: string,
+	links: string[]
+): string {
+	let text: string = sentence;
+	for (const link of links)
+		text = text.replace(link, `[${getPlatformName(link)}]`);
+	return text;
+}
+
+export function getPlatformName(url: string) {
+	if (url.includes("udemy")) return "Udemy";
+	else if (url.includes("coursera")) return "Coursera";
+	else if (url.includes("youtube")) return "YouTube";
+	else if (url.includes("linkedin")) return "LinkedIn";
+	else if (url.includes("tiktok")) return "TikTok";
+	else if (url.includes("instagram")) return "Instagram";
+	else if (url.includes("facebook")) return "Facebook";
+	else if (url.includes("x.com") || url.includes("twitter"))
+		return "Twitter / X";
+	else return "Website";
+}
