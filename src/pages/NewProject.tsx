@@ -62,6 +62,7 @@ export default function NewProject(): ReactNode {
 							status: projectStatus,
 							title: projectTitle,
 							description: projectDescription,
+							html_description: "",
 							tasks: [],
 							notes: [],
 							created_at: new Date().toISOString(),
@@ -73,7 +74,7 @@ export default function NewProject(): ReactNode {
 						if (folderID) projectFormData.folder_id = folderID;
 						if (projectDescription) {
 							projectFormData.links = extractLinks(projectDescription);
-							projectFormData.description = replaceLinksInSentence(
+							projectFormData.html_description = replaceLinksInSentence(
 								projectFormData.description,
 								projectFormData.links
 							);

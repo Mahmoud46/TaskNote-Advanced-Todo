@@ -160,13 +160,15 @@ export default function Project(): ReactNode {
 											<LuNotebook className="text-sm" />
 											<span>Description</span>
 										</p>
-										<p className="w-full text-sm pl-5 overflow-hidden wrap-break-word">
-											{
-												dataController.projectsDataController.getProject(
-													project_id as string
-												).description
-											}
-										</p>
+										<p
+											className="w-full text-sm pl-5 overflow-auto wrap-break-word description"
+											dangerouslySetInnerHTML={{
+												__html:
+													dataController.projectsDataController.getProject(
+														project_id as string
+													).html_description,
+											}}
+										></p>
 
 										{dataController.projectsDataController.getProject(
 											project_id as string

@@ -96,16 +96,9 @@ export default function UpdateProject(): ReactNode {
 							category: projectCategory,
 						};
 
-						if (projectFormData.description) {
-							if (projectFormData.links)
-								projectFormData.links = [
-									...new Set([
-										...projectFormData.links,
-										...extractLinks(projectDescription),
-									]),
-								];
-							else projectFormData.links = extractLinks(projectDescription);
-							projectFormData.description = replaceLinksInSentence(
+						if (projectDescription) {
+							projectFormData.links = extractLinks(projectDescription);
+							projectFormData.html_description = replaceLinksInSentence(
 								projectFormData.description,
 								projectFormData.links
 							);

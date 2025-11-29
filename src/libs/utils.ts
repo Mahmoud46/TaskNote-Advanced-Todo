@@ -70,7 +70,10 @@ export function replaceLinksInSentence(
 ): string {
 	let text: string = sentence;
 	for (const link of links)
-		text = text.replace(link, `[${getPlatformName(link)}]`);
+		text = text.replace(
+			link,
+			`<a href="${link}" target="_blank">${getPlatformName(link)}</a>`
+		);
 	return text;
 }
 

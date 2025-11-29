@@ -22,6 +22,7 @@ export interface IProject {
 	status: TProjectStatus;
 	title: string;
 	description: string;
+	html_description:string
 	tasks: string[]; // Tasks IDs
 	notes: string[]; // Notes IDs
 	links?: string[];
