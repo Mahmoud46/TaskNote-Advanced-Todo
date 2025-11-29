@@ -15,12 +15,41 @@ export default function FoldersOverview(): ReactNode {
 		Context
 	) as IContext;
 	return (
-		<div className="flex flex-col gap-1 glass p-2 rounded-2xl">
-			<h1 className="font-semibold px-2">My Folders</h1>
+		<div className="w-fit flex flex-col gap-1 glass p-2 rounded-2xl">
+			<div className="flex justify-between items-center">
+				<h1 className="font-semibold px-2">My Folders</h1>
+				<div className="flex items-center justify-center flex-row-reverse">
+					<Link
+						to={"/folders"}
+						className="text-xl glass p-0.5 rounded-full flex items-center justify-center gap-0.5 group cursor-pointer"
+					>
+						{dataController.foldersDataController.folders.length > 2 && (
+							<p className="text-xs text-center pl-1">
+								+{dataController.foldersDataController.folders.length - 2}
+							</p>
+						)}
+						<div className="p-2 transition-full duration-300 group-hover:bg-white group-hover:text-gray-900 rounded-full group-hover:-rotate-45">
+							<LuArrowRight />
+						</div>
+					</Link>
+
+					<div
+						onClick={() => {
+							setPrevPath("/");
+							navigate("/new-folder");
+						}}
+						className="text-xl p-0.5 glass rounded-full group cursor-pointer"
+					>
+						<div className="p-2 transition-full duration-300 group-hover:bg-white group-hover:text-gray-900 rounded-full">
+							<LuFolderPlus />
+						</div>
+					</div>
+				</div>
+			</div>
 			{dataController.foldersDataController.folders.length > 0 && (
 				<div className="flex gap-2 items-center">
 					{dataController.foldersDataController.folders
-						.slice(0, 1)
+						.slice(0, 2)
 						.map((folder, i) => (
 							<div
 								className="flex flex-col justify-between glass rounded-xl p-0.5 rounded-tr-3xl w-[180px] h-[128px]"
@@ -54,33 +83,6 @@ export default function FoldersOverview(): ReactNode {
 								</div>
 							</div>
 						))}
-					<div className="flex flex-col items-center justify-center">
-						<Link
-							to={"/folders"}
-							className="text-xl glass p-0.5 rounded-full flex flex-col justify-center gap-0.5 group cursor-pointer"
-						>
-							<div className="p-2 transition-full duration-300 group-hover:bg-white group-hover:text-gray-900 rounded-full group-hover:-rotate-45">
-								<LuArrowRight />
-							</div>
-							{dataController.foldersDataController.folders.length > 2 && (
-								<p className="text-xs text-center pb-1">
-									+{dataController.foldersDataController.folders.length - 2}
-								</p>
-							)}
-						</Link>
-
-						<div
-							onClick={() => {
-								setPrevPath("/");
-								navigate("/new-folder");
-							}}
-							className="text-xl p-0.5 glass rounded-full group cursor-pointer"
-						>
-							<div className="p-2 transition-full duration-300 group-hover:bg-white group-hover:text-gray-900 rounded-full">
-								<LuFolderPlus />
-							</div>
-						</div>
-					</div>
 				</div>
 			)}
 			{dataController.foldersDataController.folders.length == 0 && (
