@@ -63,7 +63,7 @@ export default function Home() {
 							{dataController.notesDataController.notes.length > 0 && (
 								<div className="overflow-auto hide-scroll flex flex-col gap-2">
 									{dataController.notesDataController.notes
-										.slice(0, 4)
+										.slice(0, 3)
 										.map((note, i) => (
 											<NoteCard note={note} key={i} />
 										))}
@@ -128,7 +128,7 @@ export default function Home() {
 							{dataController.tasksDataController.tasks.length > 0 && (
 								<div className="overflow-auto hide-scroll flex flex-col gap-2">
 									{dataController.tasksDataController.tasks
-										.slice(0, 4)
+										.slice(0, 3)
 										.map((task, i) => (
 											<TaskCard task={task} key={i} />
 										))}
