@@ -15,7 +15,7 @@ export default function FoldersOverview(): ReactNode {
 		Context
 	) as IContext;
 	return (
-		<div className="w-fit flex flex-col gap-1 glass p-2 rounded-2xl">
+		<div className="w-full sm:w-fit flex flex-col gap-1 glass p-2 rounded-2xl">
 			<div className="flex justify-between items-center">
 				<h1 className="font-semibold px-2">My Folders</h1>
 				<div className="flex items-center justify-center flex-row-reverse">
@@ -48,49 +48,9 @@ export default function FoldersOverview(): ReactNode {
 			</div>
 			{dataController.foldersDataController.folders.length > 0 && (
 				<>
-					<div className="gap-2 items-center flex-wrap hidden md:flex">
+					<div className="flex gap-2 items-center overflow-auto w-full sm:w-auto">
 						{dataController.foldersDataController.folders
 							.slice(0, 2)
-							.map((folder, i) => (
-								<div
-									className="flex flex-col justify-between glass rounded-xl p-0.5 rounded-tr-3xl w-[180px] h-[128px]"
-									key={i}
-								>
-									<div className="flex justify-end -translate-x-0.5 translate-y-0.5">
-										<Link
-											to={`/folders/${folder.folder_id}`}
-											className="p-2 rounded-full glass w-fit cursor-pointer flex-none transition duration-300 hover:-rotate-45"
-										>
-											<LuArrowRight />
-										</Link>
-									</div>
-									<div className="p-2 flex gap-2 items-center">
-										<div className="text-xl px-1">
-											{folder.category && (
-												<CustomCategoryIcon category={folder.category} />
-											)}
-											{!folder.category && <LuFolder />}
-										</div>
-										<div className="">
-											<h1 className="text-base line-clamp-1">{folder.title}</h1>
-											<p className="text-xs">
-												{new Date(folder.created_at).toLocaleDateString(
-													"en-US",
-													{
-														year: "numeric",
-														month: "short",
-														day: "numeric",
-													}
-												)}
-											</p>
-										</div>
-									</div>
-								</div>
-							))}
-					</div>
-					<div className="gap-2 items-center flex-wrap flex md:hidden">
-						{dataController.foldersDataController.folders
-							.slice(0, 1)
 							.map((folder, i) => (
 								<div
 									className="flex flex-col justify-between glass rounded-xl p-0.5 rounded-tr-3xl w-[180px] h-[128px]"

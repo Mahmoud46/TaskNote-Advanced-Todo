@@ -15,7 +15,7 @@ export default function OverviewPieChartContainer({
 	const [itemName, setItemName] = useState<TItem>(customName ?? "Tasks");
 
 	return (
-		<div className="glass flex flex-col p-2 rounded-2xl gap-2 px-2">
+		<div className="glass flex flex-col p-2 rounded-2xl gap-2 px-2 w-full sm:w-auto">
 			{!customName && (
 				<h1 className="text-left w-full font-semibold">
 					<select
