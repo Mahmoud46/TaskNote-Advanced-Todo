@@ -47,7 +47,7 @@ export default function FoldersOverview(): ReactNode {
 				</div>
 			</div>
 			{dataController.foldersDataController.folders.length > 0 && (
-				<div className="flex gap-2 items-center">
+				<div className="flex gap-2 items-center flex-wrap">
 					{dataController.foldersDataController.folders
 						.slice(0, 2)
 						.map((folder, i) => (
