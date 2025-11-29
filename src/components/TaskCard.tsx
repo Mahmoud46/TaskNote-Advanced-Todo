@@ -62,12 +62,12 @@ export default function TaskCard({ task }: { task: ITask }): ReactNode {
 					)}
 				</label>
 			</div>
-			<div className="flex-1 flex flex-col items-start">
+			<div className="flex-1 min-w-[230px] flex flex-col items-start">
 				<div className="flex items-start gap-2 justify-between w-full">
 					<div className="">
 						<p
 							className={`overflow-hidden transition-all duration-300 ${
-								isOpen ? "max-h-40 mb-2" : "max-h-6"
+								isOpen ? "max-h-40" : "max-h-6"
 							}`}
 						>
 							{task.title}
@@ -101,7 +101,11 @@ export default function TaskCard({ task }: { task: ITask }): ReactNode {
 						<div
 							onClick={() => {
 								setPrevPath(location.pathname);
-								navigate(`${location.pathname}/update-task/${task.task_id}`);
+								navigate(
+									`${
+										location.pathname == "/" ? "" : location.pathname
+									}/update-task/${task.task_id}`
+								);
 							}}
 							className="p-2 text-sm cursor-pointer transition duration-300 hover:bg-white hover:text-gray-900 rounded-full"
 						>

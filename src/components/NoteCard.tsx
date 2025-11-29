@@ -37,7 +37,7 @@ export default function NoteCard({ note }: { note: INote }) {
 				{note.category && <CustomCategoryIcon category={note.category} />}
 				{!note.category && <LuFileText />}
 			</div>
-			<div className="flex-1 flex flex-col items-start">
+			<div className="flex-1 min-w-[220px] flex flex-col items-start">
 				<div className="flex items-start w-full justify-between gap-2">
 					<div className="">
 						<p
@@ -76,7 +76,11 @@ export default function NoteCard({ note }: { note: INote }) {
 						<div
 							onClick={() => {
 								setPrevPath(location.pathname);
-								navigate(`${location.pathname}/update-note/${note.note_id}`);
+								navigate(
+									`${
+										location.pathname == "/" ? "" : location.pathname
+									}/update-note/${note.note_id}`
+								);
 							}}
 							className="p-2 text-sm cursor-pointer transition duration-300 hover:bg-white hover:text-gray-900 rounded-full"
 						>

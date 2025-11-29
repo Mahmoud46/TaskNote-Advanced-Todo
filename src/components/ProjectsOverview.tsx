@@ -26,55 +26,55 @@ export default function ProjectsOverview(): ReactNode {
 						{dataController.projectsDataController.projects
 							.slice(0, 2)
 							.map((project, i) => (
-								<div
-									key={i}
-									className="glass flex items-start gap-2 p-2 rounded-xl rounded-tr-3xl"
-								>
-									<div className="text-xl mr-1">
-										{project.category && (
-											<CustomCategoryIcon
-												category={project.category as TCustomCategory}
-											/>
-										)}
-										{!project.category && <LuRocket />}
-									</div>
-									<div className="flex-1">
-										<p>{project.title}</p>
-										<div className="flex items-center flex-wrap">
-											<p className="text-xs flex gap-1 items-center  min-w-1/2">
-												<LuCalendarPlus className="text-sm" />
-												<span>
-													{new Date(project.start_date).toLocaleDateString(
-														"en-US",
-														{
-															year: "numeric",
-															month: "short",
-															day: "numeric",
-														}
-													)}
-												</span>
-											</p>
-											<p className="text-xs flex gap-1 items-center min-w-1/2">
-												<LuCalendarClock className="text-sm" />
-												<span>
-													{new Date(project.due_date).toLocaleDateString(
-														"en-US",
-														{
-															year: "numeric",
-															month: "short",
-															day: "numeric",
-														}
-													)}
-												</span>
-											</p>
+								<div className="glass p-2 rounded-xl rounded-tr-3xl" key={i}>
+									<div key={i} className="flex items-start gap-2">
+										<div className="text-xl mr-1 mt-0.5">
+											{project.category && (
+												<CustomCategoryIcon
+													category={project.category as TCustomCategory}
+												/>
+											)}
+											{!project.category && <LuRocket />}
 										</div>
+										<div className="flex-1">
+											<p>{project.title}</p>
+										</div>
+										<Link
+											to={`projects/${project.project_id}`}
+											className="p-2 rounded-full glass w-fit cursor-pointer flex-none translate-x-1 -translate-y-1 transition duration-300 hover:-rotate-45"
+										>
+											<LuArrowRight />
+										</Link>
 									</div>
-									<Link
-										to={`projects/${project.project_id}`}
-										className="p-2 rounded-full glass w-fit cursor-pointer flex-none translate-x-1 -translate-y-1 transition duration-300 hover:-rotate-45"
-									>
-										<LuArrowRight />
-									</Link>
+
+									<div className="flex flex-wrap items-center gap-2 pl-4 xl:gap-4 xl:pl-8">
+										<p className="text-xs flex gap-1 items-center">
+											<LuCalendarPlus className="text-sm" />
+											<span>
+												{new Date(project.start_date).toLocaleDateString(
+													"en-US",
+													{
+														year: "numeric",
+														month: "short",
+														day: "numeric",
+													}
+												)}
+											</span>
+										</p>
+										<p className="text-xs flex gap-1 items-center">
+											<LuCalendarClock className="text-sm" />
+											<span>
+												{new Date(project.due_date).toLocaleDateString(
+													"en-US",
+													{
+														year: "numeric",
+														month: "short",
+														day: "numeric",
+													}
+												)}
+											</span>
+										</p>
+									</div>
 								</div>
 							))}
 					</div>
