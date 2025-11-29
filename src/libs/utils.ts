@@ -1,3 +1,6 @@
+import { PRIORITY_MAP } from "../constants/data";
+import type { ITask } from "../interfaces/Data.interface";
+
 export const toggleTheme = (): void => {
 	const root = document.documentElement;
 	root.classList.toggle("light");
@@ -89,4 +92,23 @@ export function getPlatformName(url: string) {
 		return "Twitter / X";
 	else if (url.includes("vercel")) return "Vercel";
 	else return "Website";
+}
+
+export function sortTasks(tasks: ITask[]): ITask[] {
+	return tasks.sort((a, b) => {
+		// 1. Checked: unchecked first
+		if (a.is_done !== b.is_done) {
+			return a.is_done ? 1 : -1;
+		}
+
+		// 2. Due date: earliest first
+		const dateA = new Date(a.due_date).getTime();
+		const dateB = new Date(b.due_date).getTime();
+		if (dateA !== dateB) {
+			return dateA - dateB;
+		}
+
+		// 3. Priority: highest first (1 high → 3 low)
+		return PRIORITY_MAP[a.priority] - PRIORITY_MAP[b.priority];
+	});
 }

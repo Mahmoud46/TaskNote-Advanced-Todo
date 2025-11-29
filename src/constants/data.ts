@@ -1,6 +1,7 @@
 import type {
 	TCustomCategory,
 	TProjectStatus,
+	TTaskPriority,
 } from "../interfaces/Data.interface";
 
 export const PROJECT_STATUS_COLOR: Record<TProjectStatus, string> = {
@@ -9,6 +10,11 @@ export const PROJECT_STATUS_COLOR: Record<TProjectStatus, string> = {
 	Pending: "text-yellow-300",
 };
 
+export const PRIORITY_MAP: Record<TTaskPriority, number> = {
+	High: 1,
+	Medium: 2,
+	Low: 3,
+};
 export const PROJECT_STATUS: { title: TProjectStatus; value: string }[] = [
 	{ title: "Completed", value: "Completed" },
 	{ title: "Pending", value: "Upcoming" },
