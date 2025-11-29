@@ -68,6 +68,7 @@ import {
 	SiInstagram,
 	SiLinkedin,
 	SiUdemy,
+	SiVercel,
 	SiYoutube,
 } from "react-icons/si";
 
@@ -255,6 +256,8 @@ export const Icon = ({
 			return <SiYoutube className={className} />;
 		case "instagram":
 			return <SiInstagram className={className} />;
+		case "vercel":
+			return <SiVercel className={className} />;
 
 		default:
 			return <LuGlobe className={className} />;
