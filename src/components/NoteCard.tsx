@@ -42,7 +42,7 @@ export default function NoteCard({ note }: { note: INote }) {
 					<div className="">
 						<p
 							className={`overflow-hidden transition-all duration-300 ${
-								isOpen ? "max-h-40 mb-2" : "max-h-6"
+								isOpen ? "max-h-40" : "max-h-6"
 							}`}
 						>
 							{note.title}
