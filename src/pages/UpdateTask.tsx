@@ -77,7 +77,7 @@ export default function UpdateTask(): ReactNode {
 	return (
 		<div className="fixed z-30 top-0 h-full w-full flex items-center justify-center -left-0">
 			{dataController.tasksDataController.includes(id as string) && (
-				<div className="glass p-2 rounded-2xl max-h-[500px] overflow-auto flex flex-col gap-2 sm:w-[50%]">
+				<div className="glass p-2 rounded-2xl max-h-[90dvh] overflow-auto flex flex-col gap-2 sm:w-[80%] md:w-[70%] lg:w-[50%]">
 					<div className="sticky top-0 z-40 flex w-full justify-between items-start">
 						<h1 className="flex items-center gap-2 text-lg p-2">
 							<LuClipboardPen className="text-xl" />
@@ -121,7 +121,7 @@ export default function UpdateTask(): ReactNode {
 							/>
 						</div>
 
-						<div className="flex gap-2">
+						<div className="flex gap-2 flex-wrap">
 							<div className="glass relative rounded-full text-sm pr-2">
 								<LuFlag className="opacity-70 absolute left-2 top-1/2 -translate-y-1/2 text-base" />
 								<select

@@ -18,13 +18,14 @@ import Notes from "./pages/Notes";
 import Folder from "./pages/Folder";
 import Project from "./pages/Project";
 import NotFound from "./pages/NotFound";
+import BottomNavbar from "./components/BottomNavbar";
 
 export default function App(): ReactNode {
 	return (
 		<>
 			<Header />
 			<Sidebar />
-			<section className={`flex pb-4 px-2 md:px-8 md:pl-[100px] text-white`}>
+			<section className={`flex px-2 md:px-8 md:pl-[100px] text-white`}>
 				<div className="flex w-full">
 					<Routes>
 						<Route path="/" element={<Home />}>
@@ -74,6 +75,7 @@ export default function App(): ReactNode {
 					</Routes>
 				</div>
 			</section>
+			<BottomNavbar />
 		</>
 	);
 }

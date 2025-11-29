@@ -1,8 +1,28 @@
+import type { IconType } from "react-icons";
 import type {
 	TCustomCategory,
 	TProjectStatus,
 	TTaskPriority,
 } from "../interfaces/Data.interface";
+import {
+	LuClipboardList,
+	LuFiles,
+	LuFolders,
+	LuHouse,
+	LuRocket,
+} from "react-icons/lu";
+
+export const PAGES_MENU_PATHS: {
+	title: string;
+	icon: IconType;
+	path: string;
+}[] = [
+	{ title: "Home", icon: LuHouse, path: "/" },
+	{ title: "Folders", icon: LuFolders, path: "/folders" },
+	{ title: "Projects", icon: LuRocket, path: "/projects" },
+	{ title: "Tasks", icon: LuClipboardList, path: "/tasks" },
+	{ title: "Notes", icon: LuFiles, path: "/notes" },
+];
 
 export const PROJECT_STATUS_COLOR: Record<TProjectStatus, string> = {
 	Completed: "text-green-300",

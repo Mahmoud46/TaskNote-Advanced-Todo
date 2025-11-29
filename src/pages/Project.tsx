@@ -43,7 +43,8 @@ export default function Project(): ReactNode {
 					project_id as string
 				) && (
 					<div className="flex flex-col gap-3">
-						<div className="flex items-center gap-2 w-full justify-between">
+						{/* Header */}
+						<div className="flex items-center gap-2 w-full justify-between flex-wrap">
 							<div className="flex items-center gap-4">
 								<div className="text-2xl">
 									<CustomCategoryIcon
@@ -150,7 +151,7 @@ export default function Project(): ReactNode {
 							</div>
 						</div>
 
-						<div className="flex items-start gap-2">
+						<div className="flex items-start gap-2 flex-wrap">
 							<div className="flex flex-col gap-2 glass p-2 rounded-2xl w-[300px]">
 								{dataController.projectsDataController.getProject(
 									project_id as string

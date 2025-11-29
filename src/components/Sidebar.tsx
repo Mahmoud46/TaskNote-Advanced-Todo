@@ -1,26 +1,14 @@
 import { useState, type ReactNode } from "react";
-import type { IconType } from "react-icons";
+
 import {
-	LuClipboardList,
 	LuClipboardPlus,
 	LuFilePlus,
-	LuFiles,
 	LuFolderPlus,
-	LuFolders,
-	LuHouse,
 	LuPlus,
-	LuRocket,
 	LuX,
 } from "react-icons/lu";
 import { Link, useLocation } from "react-router-dom";
-
-const pagesMenuPaths: { title: string; icon: IconType; path: string }[] = [
-	{ title: "Home", icon: LuHouse, path: "/" },
-	{ title: "Folders", icon: LuFolders, path: "/folders" },
-	{ title: "Projects", icon: LuRocket, path: "/projects" },
-	{ title: "Tasks", icon: LuClipboardList, path: "/tasks" },
-	{ title: "Notes", icon: LuFiles, path: "/notes" },
-];
+import { PAGES_MENU_PATHS } from "../constants/data";
 
 export default function Sidebar(): ReactNode {
 	const location = useLocation();
@@ -115,7 +103,7 @@ export default function Sidebar(): ReactNode {
 					isAddOptionsOpen ? "-translate-y-0" : "-translate-y-30"
 				}`}
 			>
-				{pagesMenuPaths.map((pagePath, i) => (
+				{PAGES_MENU_PATHS.map((pagePath, i) => (
 					<li
 						key={i}
 						className="flex items-center group text-sm transition duration-300 cursor-pointer rounded-xl w-fit"
