@@ -27,7 +27,7 @@ export default function Sidebar(): ReactNode {
 	const [isAddOptionsOpen, setIsAddOptionsOpen] = useState<boolean>(false);
 	return (
 		<aside
-			className={`fixed left-0 h-[100dvh] flex flex-col p-4 pl-8 gap-4 z-50`}
+			className={`fixed left-0 h-[100dvh] flex-col p-4 pl-8 gap-4 z-50 hidden md:flex`}
 		>
 			<ul className="w-fit overflow-hidden">
 				<li

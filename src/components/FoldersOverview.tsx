@@ -15,12 +15,12 @@ export default function FoldersOverview(): ReactNode {
 		Context
 	) as IContext;
 	return (
-		<div className="flex-1 flex flex-col gap-1 glass p-2 rounded-2xl">
+		<div className="flex flex-col gap-1 glass p-2 rounded-2xl">
 			<h1 className="font-semibold px-2">My Folders</h1>
 			{dataController.foldersDataController.folders.length > 0 && (
 				<div className="flex gap-2 items-center">
 					{dataController.foldersDataController.folders
-						.slice(0, 2)
+						.slice(0, 1)
 						.map((folder, i) => (
 							<div
 								className="flex flex-col justify-between glass rounded-xl p-0.5 rounded-tr-3xl w-[180px] h-[128px]"

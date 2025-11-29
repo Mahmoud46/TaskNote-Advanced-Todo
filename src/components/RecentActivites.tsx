@@ -15,11 +15,11 @@ export default function RecentActivites(): ReactNode {
 						<p>Recent Activites</p>
 					</div>
 					<div className="flex flex-col gap-2 max-h-[400px] overflow-auto hide-scroll">
-						{dataController.activitiesDataController.activities.map(
-							(activity, i) => (
+						{dataController.activitiesDataController.activities
+							.slice(0, 5)
+							.map((activity, i) => (
 								<ActivityCard activity={activity} key={i} />
-							)
-						)}
+							))}
 					</div>
 				</>
 			)}

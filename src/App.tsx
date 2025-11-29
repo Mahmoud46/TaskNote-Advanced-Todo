@@ -24,7 +24,7 @@ export default function App(): ReactNode {
 		<>
 			<Header />
 			<Sidebar />
-			<section className={`flex pb-4 pr-8 pl-[100px] text-white`}>
+			<section className={`flex pb-4 px-2 md:px-8 md:pl-[100px] text-white`}>
 				<div className="flex w-full">
 					<Routes>
 						<Route path="/" element={<Home />}>

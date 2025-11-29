@@ -15,7 +15,6 @@ import { CustomCategoryIcon } from "../libs/icons";
 import type { TCustomCategory } from "../interfaces/Data.interface";
 import { CUSTOME_CATEGRIES } from "../constants/data";
 import NoteCard from "../components/NoteCard";
-import HorizontalBarChart from "../components/HorizontalBarChart";
 
 export default function Notes(): ReactNode {
 	const { dataController, setPrevPath, navigate } = useContext(
@@ -26,11 +25,12 @@ export default function Notes(): ReactNode {
 	return (
 		<>
 			<div className="w-full relative">
-				<div className="flex flex-col gap-2 glass min-h-[85dvh] p-4 rounded-2xl w-full">
+				<div className="flex flex-col gap-2 glass min-h-[90dvh] p-4 rounded-2xl w-full">
 					<h1 className="text-4xl">My Notes</h1>
 					{dataController.notesDataController.notes.length > 0 && (
 						<>
-							<div className="flex justify-end">
+							{/* Controllers */}
+							<div className="flex justify-end flex-wrap">
 								<div className="glass relative rounded-full pr-2">
 									<div className="absolute opacity-80 top-1/2 -translate-y-1/2 left-2">
 										<LuSearch />
@@ -83,41 +83,9 @@ export default function Notes(): ReactNode {
 									</div>
 								</div>
 							</div>
-							<div className="flex w-full gap-2">
-								<div className="w-[300px]">
-									<div className="glass p-2 rounded-2xl flex flex-col gap-2">
-										<p className="px-2 font-semibold">Notes categories</p>
-										<HorizontalBarChart />
-										<div className="flex flex-wrap gap-2">
-											{dataController.notesDataController.notesCategoriesCount
-												.slice(0, 6)
-												.map((item, i) => (
-													<div
-														className="flex items-center gap-2 glass p-1 rounded-2xl pr-3 flex-1 max-w-[150px] cursor-pointer group"
-														key={i}
-														onClick={() => setCatStatus(item.category)}
-													>
-														<div
-															className={`p-2 rounded-full text-xl flex-none transition duration-300 group-hover:bg-white group-hover:text-gray-900 ${
-																catStatus == item.category
-																	? "bg-white text-gray-900"
-																	: ""
-															}`}
-														>
-															<CustomCategoryIcon category={item.category} />
-														</div>
-														<div className="flex-1">
-															<p className="text-xs opacity-70 line-clamp-1">
-																{item.category}
-															</p>
-															<p className="font-medium">{item.count}</p>
-														</div>
-													</div>
-												))}
-										</div>
-									</div>
-								</div>
-								<div className="flex gap-2 flex-1 items-start">
+
+							<div className="flex justify-center">
+								<div className="flex w-full gap-2 items-start flex-wrap max-w-[800px]">
 									<div className="flex flex-col gap-2 flex-1 glass p-2 rounded-2xl">
 										<h2 className="flex gap-2 items-center">
 											{catStatus != "All" && (

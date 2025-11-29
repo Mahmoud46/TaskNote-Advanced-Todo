@@ -61,10 +61,12 @@ export default function Home() {
 								)}
 							</div>
 							{dataController.notesDataController.notes.length > 0 && (
-								<div className="max-h-[300px] overflow-auto hide-scroll flex flex-col gap-2">
-									{dataController.notesDataController.notes.map((note, i) => (
-										<NoteCard note={note} key={i} />
-									))}
+								<div className="overflow-auto hide-scroll flex flex-col gap-2">
+									{dataController.notesDataController.notes
+										.slice(0, 4)
+										.map((note, i) => (
+											<NoteCard note={note} key={i} />
+										))}
 								</div>
 							)}
 							{dataController.notesDataController.notes.length == 0 && (
@@ -124,10 +126,12 @@ export default function Home() {
 								)}
 							</div>
 							{dataController.tasksDataController.tasks.length > 0 && (
-								<div className="max-h-[300px] overflow-auto hide-scroll flex flex-col gap-2">
-									{dataController.tasksDataController.tasks.map((task, i) => (
-										<TaskCard task={task} key={i} />
-									))}
+								<div className="overflow-auto hide-scroll flex flex-col gap-2">
+									{dataController.tasksDataController.tasks
+										.slice(0, 4)
+										.map((task, i) => (
+											<TaskCard task={task} key={i} />
+										))}
 								</div>
 							)}
 							{dataController.tasksDataController.tasks.length == 0 && (

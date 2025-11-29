@@ -18,11 +18,11 @@ export default function Projects(): ReactNode {
 	return (
 		<>
 			<div className="w-full relative">
-				<div className="flex flex-col gap-2 glass min-h-[85dvh] p-4 rounded-2xl w-full">
+				<div className="flex flex-col gap-2 glass min-h-[90dvh] p-4 rounded-2xl w-full">
 					<h1 className="text-4xl">My Projects</h1>
 					{dataController.projectsDataController.projects.length > 0 && (
 						<>
-							<div className="flex justify-end">
+							<div className="flex justify-end flex-wrap">
 								<div className="glass relative rounded-full pr-2">
 									<div className="absolute opacity-80 top-1/2 -translate-y-1/2 left-2">
 										<LuSearch />

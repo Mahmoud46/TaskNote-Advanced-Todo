@@ -31,9 +31,10 @@ export default function Folder(): ReactNode {
 	const location = useLocation();
 	return (
 		<div className="w-full relative">
-			<div className="flex flex-col gap-2 glass min-h-[85dvh] p-4 rounded-2xl w-full">
+			<div className="flex flex-col gap-2 glass min-h-dvh p-4 rounded-2xl w-full">
 				{dataController.foldersDataController.includes(folder_id as string) && (
 					<div className="flex flex-col gap-2">
+						{/* Header */}
 						<div className="flex items-center gap-2 w-full justify-between">
 							<div className="flex items-center gap-4">
 								<div className="text-2xl">
@@ -127,7 +128,8 @@ export default function Folder(): ReactNode {
 							</div>
 						</div>
 
-						<div className="flex items-center justify-end gap-2">
+						{/* Stats */}
+						<div className="flex items-center justify-start md:justify-end gap-2 overflow-auto w-ful hide-scroll">
 							<div className="flex flex-none items-center gap-4 glass p-1 rounded-2xl pr-3 w-[150px]">
 								<LuRocket className="ml-1 text-xl flex-none" />
 								<div className="flex-1">
@@ -163,8 +165,9 @@ export default function Folder(): ReactNode {
 							</div>
 						</div>
 
-						<div className="flex items-start gap-2">
-							<div className="flex flex-col gap-2 glass p-2 rounded-2xl w-[300px]">
+						<div className="flex items-start gap-2 flex-wrap">
+							{/* Projects */}
+							<div className="flex-1 flex flex-col gap-2 glass p-2 rounded-2xl min-w-[300px]">
 								{dataController.foldersDataController.getFolder(
 									folder_id as string
 								).projects.length > 0 && (
@@ -235,6 +238,8 @@ export default function Folder(): ReactNode {
 									</div>
 								)}
 							</div>
+
+							{/* Tasks */}
 							<div className="flex flex-col gap-2 flex-1 glass p-2 rounded-2xl">
 								{dataController.foldersDataController.getFolder(
 									folder_id as string
@@ -308,6 +313,8 @@ export default function Folder(): ReactNode {
 									</div>
 								)}
 							</div>
+
+							{/* Notes */}
 							<div className="flex flex-col gap-2 flex-1 glass p-2 rounded-2xl">
 								{dataController.foldersDataController.getFolder(
 									folder_id as string

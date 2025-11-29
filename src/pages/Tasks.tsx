@@ -33,7 +33,7 @@ export default function Tasks(): ReactNode {
 					<h1 className="text-4xl">My Tasks</h1>
 					{dataController.tasksDataController.tasks.length > 0 && (
 						<>
-							<div className="flex justify-end">
+							<div className="flex justify-end flex-wrap">
 								<div className="glass relative rounded-full pr-2">
 									<div className="absolute opacity-80 top-1/2 -translate-y-1/2 left-2">
 										<LuSearch />
@@ -89,8 +89,8 @@ export default function Tasks(): ReactNode {
 									</div>
 								</div>
 							</div>
-							<div className="flex w-full gap-2">
-								<div className="flex flex-col gap-2 w-[300px]">
+							<div className="flex w-full gap-2 flex-wrap items-start">
+								<div className="flex flex-col gap-2 mn-w-[300px] flex-1">
 									<OverviewPieChartContainer customName="Tasks" />
 									<div className="flex gap-2 w-full overflow-auto hide-scroll">
 										<div className="flex items-center gap-4 glass p-1 rounded-2xl pr-3 flex-1">
@@ -121,58 +121,56 @@ export default function Tasks(): ReactNode {
 										</div>
 									</div>
 								</div>
-								<div className="flex gap-2 flex-1 items-start">
-									<div className="flex flex-col gap-2 flex-1 glass p-2 rounded-2xl">
-										<h2 className="flex gap-2 items-center">
-											<LuClipboardList className="text-xl" />{" "}
-											<span className="text-lg">
-												{taskPriority != "All"
-													? `${taskPriority}-priority`
-													: taskPriority}{" "}
-												Tasks
-											</span>
-										</h2>
-										<div className="flex flex-col max-w-[500px] gap-2 max-h-[450px] overflow-auto hide-scroll">
-											{dataController.tasksDataController.tasks
-												.filter(
-													(task) =>
-														(taskPriority == "All"
-															? task
-															: task.priority == taskPriority) &&
-														(searchTitle.trim() == ""
-															? task
-															: task.title
-																	.toLowerCase()
-																	.includes(searchTitle.toLowerCase()))
-												)
-												.map((task, i) => (
-													<TaskCard task={task} key={i} />
-												))}
-										</div>
+								<div className=" flex-col gap-2 flex-1 glass p-2 rounded-2xl">
+									<h2 className="flex gap-2 items-center">
+										<LuClipboardList className="text-xl" />{" "}
+										<span className="text-lg">
+											{taskPriority != "All"
+												? `${taskPriority}-priority`
+												: taskPriority}{" "}
+											Tasks
+										</span>
+									</h2>
+									<div className="flex flex-col max-w-[500px] gap-2 max-h-[450px] overflow-auto hide-scroll">
+										{dataController.tasksDataController.tasks
+											.filter(
+												(task) =>
+													(taskPriority == "All"
+														? task
+														: task.priority == taskPriority) &&
+													(searchTitle.trim() == ""
+														? task
+														: task.title
+																.toLowerCase()
+																.includes(searchTitle.toLowerCase()))
+											)
+											.map((task, i) => (
+												<TaskCard task={task} key={i} />
+											))}
 									</div>
-									<div className="flex flex-col gap-2 flex-1 glass p-2 rounded-2xl">
-										<h2 className="flex gap-2 items-center">
-											<LuStar className="text-xl" />{" "}
-											<span className="text-lg">Favourite Tasks</span>
-										</h2>
-										<div className="flex flex-col max-w-[500px] gap-2 max-h-[450px] overflow-auto hide-scroll">
-											{dataController.tasksDataController.tasks
-												.filter(
-													(task) =>
-														(taskPriority == "All"
-															? task
-															: task.priority == taskPriority) &&
-														(searchTitle.trim() == ""
-															? task
-															: task.title
-																	.toLowerCase()
-																	.includes(searchTitle.toLowerCase())) &&
-														task.is_fav
-												)
-												.map((task, i) => (
-													<TaskCard task={task} key={i} />
-												))}
-										</div>
+								</div>
+								<div className="flex flex-col gap-2 flex-1 glass p-2 rounded-2xl">
+									<h2 className="flex gap-2 items-center">
+										<LuStar className="text-xl" />{" "}
+										<span className="text-lg">Favourite Tasks</span>
+									</h2>
+									<div className="flex flex-col max-w-[500px] gap-2 max-h-[450px] overflow-auto hide-scroll">
+										{dataController.tasksDataController.tasks
+											.filter(
+												(task) =>
+													(taskPriority == "All"
+														? task
+														: task.priority == taskPriority) &&
+													(searchTitle.trim() == ""
+														? task
+														: task.title
+																.toLowerCase()
+																.includes(searchTitle.toLowerCase())) &&
+													task.is_fav
+											)
+											.map((task, i) => (
+												<TaskCard task={task} key={i} />
+											))}
 									</div>
 								</div>
 							</div>

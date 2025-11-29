@@ -27,7 +27,7 @@ export default function Folders(): ReactNode {
 	return (
 		<>
 			<div className="w-full relative">
-				<div className="flex flex-col gap-2 glass min-h-[85dvh] p-4 rounded-2xl w-full">
+				<div className="flex flex-col gap-2 glass min-h-dvh p-4 rounded-2xl w-full">
 					<h1 className="text-4xl">My Folders</h1>
 					{dataController.foldersDataController.folders.length > 0 && (
 						<>
