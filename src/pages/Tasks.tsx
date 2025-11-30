@@ -90,7 +90,7 @@ export default function Tasks(): ReactNode {
 								</div>
 							</div>
 							<div className="flex w-full gap-2 flex-wrap items-start">
-								<div className="flex flex-col gap-2 mn-w-[300px] flex-1">
+								<div className="flex flex-col gap-2 min-w-[300px] flex-1">
 									<OverviewPieChartContainer customName="Tasks" />
 									<div className="flex gap-2 w-full overflow-auto hide-scroll">
 										<div className="flex items-center gap-4 glass p-1 rounded-2xl pr-3 flex-1">
