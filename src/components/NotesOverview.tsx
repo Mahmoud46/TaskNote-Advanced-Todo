@@ -1,18 +1,20 @@
-import { useContext } from "react";
+import { useContext, type ReactNode } from "react";
 import { Context } from "../context/Context";
 import type { IContext } from "../interfaces/Context.interface";
 import { LuFilePlus, LuArrowRight, LuFileX } from "react-icons/lu";
 import { Link } from "react-router-dom";
 import NoteCard from "./NoteCard";
 
-export default function NotessOverview() {
+export default function NotessOverview(): ReactNode {
 	const { dataController, setPrevPath, navigate } = useContext(
 		Context
 	) as IContext;
 	return (
 		<div className="flex-1 flex flex-col gap-1 glass p-2 rounded-2xl">
 			<div className="flex justify-between items-center">
-				<h1 className="font-semibold px-2 flex items-center gap-2">Notes</h1>
+				<h1 className="font-semibold px-2 flex items-center gap-2">
+					Recent Notes
+				</h1>
 				{dataController.notesDataController.notes.length > 0 && (
 					<div className="flex items-center">
 						<div

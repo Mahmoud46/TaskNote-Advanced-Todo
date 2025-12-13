@@ -17,7 +17,7 @@ export default function FoldersOverview(): ReactNode {
 	return (
 		<div className="w-full sm:w-fit flex flex-col gap-1 glass p-2 rounded-2xl">
 			<div className="flex justify-between items-center">
-				<h1 className="font-semibold px-2">Folders</h1>
+				<h1 className="font-semibold px-2">Recent Folders</h1>
 				<div className="flex items-center justify-center flex-row-reverse">
 					<Link
 						to={"/folders"}

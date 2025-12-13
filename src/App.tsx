@@ -19,6 +19,7 @@ import Folder from "./pages/Folder";
 import Project from "./pages/Project";
 import NotFound from "./pages/NotFound";
 import BottomNavbar from "./components/BottomNavbar";
+import ActivitiesHistory from "./pages/ActivitiesHistory";
 
 export default function App(): ReactNode {
 	return (
@@ -70,6 +71,7 @@ export default function App(): ReactNode {
 							<Route path="new-note" element={<NewNote />} />
 							<Route path="update-note/:id" element={<UpdateNote />} />
 						</Route>
+						<Route path="/activities-history" element={<ActivitiesHistory />} />
 
 						<Route path="*" element={<NotFound />} />
 					</Routes>

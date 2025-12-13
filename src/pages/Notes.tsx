@@ -26,7 +26,7 @@ export default function Notes(): ReactNode {
 		<>
 			<div className="w-full relative">
 				<div className="flex flex-col gap-2 glass min-h-[90dvh] p-4 rounded-2xl w-full">
-					<h1 className="text-3xl sm:text-4xl">Notes</h1>
+					<h1 className="text-2xl sm:text-4xl">Your Notes</h1>
 					{dataController.notesDataController.notes.length > 0 && (
 						<>
 							{/* Controllers */}

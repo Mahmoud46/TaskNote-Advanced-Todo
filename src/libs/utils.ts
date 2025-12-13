@@ -1,5 +1,4 @@
-import { PRIORITY_MAP } from "../constants/data";
-import type { ITask } from "../interfaces/Data.interface";
+import type { IActivity } from "../interfaces/Data.interface";
 
 export const toggleTheme = (): void => {
 	const root = document.documentElement;
@@ -94,21 +93,51 @@ export function getPlatformName(url: string) {
 	else return "Website";
 }
 
-export function sortTasks(tasks: ITask[]): ITask[] {
-	return tasks.sort((a, b) => {
-		// 1. Checked: unchecked first
-		if (a.is_done !== b.is_done) {
-			return a.is_done ? 1 : -1;
-		}
+const getDateCategory = (date: Date): string => {
+	const now = new Date();
 
-		// 2. Due date: earliest first
-		const dateA = new Date(a.due_date).getTime();
-		const dateB = new Date(b.due_date).getTime();
-		if (dateA !== dateB) {
-			return dateA - dateB;
-		}
+	const startOfToday = new Date(now);
+	startOfToday.setHours(0, 0, 0, 0);
 
-		// 3. Priority: highest first (1 high → 3 low)
-		return PRIORITY_MAP[a.priority] - PRIORITY_MAP[b.priority];
+	const startOfYesterday = new Date(startOfToday);
+	startOfYesterday.setDate(startOfToday.getDate() - 1);
+
+	const startOfWeek = new Date(startOfToday);
+	startOfWeek.setDate(startOfToday.getDate() - startOfToday.getDay());
+
+	const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+	if (date >= startOfToday) return "Today";
+	if (date >= startOfYesterday) return "Yesterday";
+	if (date >= startOfWeek) return "This Week";
+	if (date >= startOfMonth) return "This Month";
+
+	return date.toLocaleDateString("en-US", {
+		month: "short",
+		year: "numeric",
 	});
+};
+
+export function activitiesDataCategorization(activities: IActivity[]): {
+	category: string;
+	activities: IActivity[];
+}[] {
+	const map = new Map<string, IActivity[]>();
+
+	for (const activity of activities) {
+		const category = getDateCategory(new Date(activity.created_at));
+
+		if (!map.has(category)) {
+			map.set(category, []);
+		}
+
+		map.get(category)!.push(activity);
+	}
+
+	return Array.from(map.entries()).map(([category, activities]) => ({
+		category,
+		activities: activities.sort(
+			(a, b) =>
+				new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+		),
+	}));
 }

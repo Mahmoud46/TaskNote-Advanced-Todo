@@ -10,7 +10,8 @@ import {
 	XAxis,
 } from "recharts";
 import type { IContext } from "../interfaces/Context.interface";
-import { LuListX } from "react-icons/lu";
+import { LuArrowRight, LuListX } from "react-icons/lu";
+import { Link } from "react-router-dom";
 
 export default function DailyActivityLineChart(): ReactNode {
 	const { dataController } = useContext(Context) as IContext;
@@ -19,7 +20,17 @@ export default function DailyActivityLineChart(): ReactNode {
 		<>
 			<div className="absolute flex p-2 pb-0 bg-theme-foreground w-full h-full rounded-xl glass">
 				<div className="flex-1 flex flex-col gap-2 px-2">
-					<h2 className="text-base font-semibold ">Daily Activity</h2>
+					<div className="flex items-center justify-between">
+						<h2 className="text-base font-semibold ">Daily Activity</h2>
+						<Link
+							to={"/activities-history"}
+							className="glass p-0.5 rounded-full flex-none group cursor-pointer flex lg:hidden"
+						>
+							<div className="p-2 text-lg transition duration-300 group-hover:bg-white group-hover:text-gray-900 group-hover:-rotate-45 rounded-full">
+								<LuArrowRight />
+							</div>
+						</Link>
+					</div>
 
 					<div className="flex-1">
 						{dataController.activitiesDataController.activities.length > 0 && (

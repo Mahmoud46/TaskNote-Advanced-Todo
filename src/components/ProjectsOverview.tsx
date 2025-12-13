@@ -64,7 +64,7 @@ export default function ProjectsOverview(): ReactNode {
 	return (
 		<div className="flex-1 flex flex-col gap-2 glass p-2 rounded-2xl">
 			<div className="flex items-center justify-between">
-				<h1 className="font-semibold px-2">Projects</h1>
+				<h1 className="font-semibold px-2">Recent Projects</h1>
 				<div className="flex items-center justify-center">
 					<div
 						onClick={() => {
