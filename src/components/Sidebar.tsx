@@ -15,7 +15,7 @@ export default function Sidebar(): ReactNode {
 	const [isAddOptionsOpen, setIsAddOptionsOpen] = useState<boolean>(false);
 	return (
 		<aside
-			className={`fixed left-0 h-[100dvh] flex-col p-4 pl-8 gap-4 z-50 hidden md:flex`}
+			className={`fixed left-0 h-[100dvh] flex-col p-4 pl-8 gap-4 z-50 hidden md:flex `}
 		>
 			<ul className="w-fit overflow-hidden">
 				<li
@@ -97,7 +97,6 @@ export default function Sidebar(): ReactNode {
 					</ul>
 				</li>
 			</ul>
-
 			<ul
 				className={`transition-all duration-300 ${
 					isAddOptionsOpen ? "-translate-y-0" : "-translate-y-30"

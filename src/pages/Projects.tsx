@@ -19,7 +19,7 @@ export default function Projects(): ReactNode {
 		<>
 			<div className="w-full relative">
 				<div className="flex flex-col gap-2 glass min-h-[90dvh] p-4 rounded-2xl w-full">
-					<h1 className="text-4xl">My Projects</h1>
+					<h1 className="text-3xl sm:text-4xl">Projects</h1>
 					{dataController.projectsDataController.projects.length > 0 && (
 						<>
 							<div className="flex justify-end flex-wrap">
