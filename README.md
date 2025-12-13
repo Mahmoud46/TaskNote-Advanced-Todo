@@ -1,73 +1,112 @@
-# React + TypeScript + Vite
+# TaskNote 📝
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+TaskNote is a modern, lightweight web application designed to help users efficiently manage **tasks** and **notes** in a structured and intuitive way. It provides a flexible organization system using **folders** and **projects**, making it ideal for personal productivity, study planning, or small project tracking.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## ✨ Features
 
-## React Compiler
+- **Local Storage Persistence**
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+  - All folders, projects, tasks, and notes are saved using the browser’s `localStorage`
+  - Data persists across page reloads without requiring a backend
 
-## Expanding the ESLint configuration
+- **Task & Note Management**
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+  - Create, update, and delete tasks and notes
+  - Keep information clean, minimal, and easy to access
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- **Folder-Based Organization**
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+  - Create folders to group related content
+  - Each folder can contain projects, tasks, and notes
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+- **Project Structuring**
+
+  - Projects can be created inside a specific folder **or exist independently (free projects)**
+  - Each project can include its own tasks and notes
+  - Enables flexible organization without forcing a strict hierarchy
+
+- **Flexible Task & Note Relationships**
+
+  - Tasks and notes can be:
+
+    - Linked to a specific **project**
+    - Linked directly to a **folder**
+    - Created as **free items** without any parent
+
+  - This flexibility allows users to organize content based on their workflow and preferences
+
+---
+
+## 🛠 Tech Stack
+
+- **Frontend Framework:** React.js
+- **Language:** TypeScript
+- **Styling:** CSS, TailwindCSS
+- **Routing:** React Router DOM
+- **Charts & Visualization:** Recharts
+- **Icons:** React Icons
+- **Utilities:** nanoid
+
+---
+
+## 📂 Application Structure
+
+- **Folders**
+
+  - Can contain projects, tasks, and notes
+
+- **Projects**
+
+  - Belong to a specific folder
+  - Can include related tasks and notes
+
+- **Tasks & Notes**
+
+  - Can exist independently or be linked to a project
+
+This hierarchical structure helps keep data organized and easy to manage as complexity grows.
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- Node.js (v16 or later recommended)
+- npm or yarn
+
+### Installation
+
+```bash
+# Clone the repository
+git clone https://github.com/Mahmoud46/TaskNote-Advanced-Todo.git
+
+# Navigate to the project directory
+cd TaskNote-Advanced-Todo
+
+# Install dependencies
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Run the App
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+The application will be available at `http://localhost:5173` (or the port shown in your terminal).
+
+---
+
+## 📌 Use Cases
+
+- Personal task and note tracking
+- Student project organization
+- Lightweight project planning
+- Daily productivity management
+
+---
+
+**TaskNote** – Simple, structured, and efficient task & note management.
