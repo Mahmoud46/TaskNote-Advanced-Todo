@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 export default function RecentActivites(): ReactNode {
 	const { dataController } = useContext(Context) as IContext;
 	return (
-		<div className="glass p-2 rounded-2xl flex flex-col gap-2">
+		<div className="glass p-2 rounded-2xl flex flex-col gap-2 w-full">
 			{dataController.activitiesDataController.activities.length > 0 && (
 				<>
 					<div className="flex justify-between items-center">

@@ -10,7 +10,7 @@ export default function NotessOverview(): ReactNode {
 		Context
 	) as IContext;
 	return (
-		<div className="flex-1 flex flex-col gap-1 glass p-2 rounded-2xl">
+		<div className="flex flex-col gap-1 glass p-2 rounded-2xl w-full md:w-[calc(50%-4px)]">
 			<div className="flex justify-between items-center">
 				<h1 className="font-semibold px-2 flex items-center gap-2">
 					Recent Notes

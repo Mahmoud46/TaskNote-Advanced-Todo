@@ -20,18 +20,20 @@ export default function ActivityCard({ activity }: { activity: IActivity }) {
 			<div className="rounded-full flex p-2 pt-3 text-lg">
 				<ActivityIcon type={activity.type} action={activity.action} />
 			</div>
-			<div className="flex-1 flex flex-col items-start">
+			<div className="flex-1 flex flex-col items-start min-w-0">
 				<div className="flex items-start w-full justify-between gap-2">
-					<div className="">
+					<div className="flex flex-col flex-1 min-w-0">
 						<p
-							className={`overflow-hidden transition-all duration-300 ${
-								isOpen ? "max-h-40 mb-2" : "max-h-6"
+							className={`overflow-hidden transition-all duration-300 break-words ${
+								isOpen ? "line-clamp-none mb-2" : "line-clamp-1"
 							}`}
 						>
 							{activity.title}
 						</p>
-						<div className="flex items-center gap-2">
-							<p className="flex gap-1 text-xs items-center">
+
+						{/* Date Section */}
+						<div className="flex items-center gap-2 shrink-0">
+							<p className="flex gap-1 text-xs items-center shrink-0">
 								<LuCalendarPlus className="text-sm" />
 								<span>
 									{new Date(activity.created_at).toLocaleDateString("en-US", {
@@ -43,7 +45,9 @@ export default function ActivityCard({ activity }: { activity: IActivity }) {
 							</p>
 						</div>
 					</div>
-					<div className="flex glass rounded-full p-0.5 mt-0.5">
+
+					{/* Chevron Button */}
+					<div className="flex glass rounded-full p-0.5 mt-0.5 flex-none">
 						<div
 							className="p-2 text-sm cursor-pointer transition duration-300 hover:bg-white hover:text-gray-900 rounded-full"
 							onClick={() => setIsOpen((prev) => !prev)}
@@ -58,7 +62,8 @@ export default function ActivityCard({ activity }: { activity: IActivity }) {
 				</div>
 
 				<div className="flex flex-col gap-2 mt-2 py-2 border-t border-gray-600 w-full text-sm pl-1">
-					<p>{activity.description}</p>
+					<p className="wrap-break-word">{activity.description}</p>
+
 					{activity.reference_id && (
 						<div className="glass w-fit p-0.5 rounded-full cursor-pointer flex group self-end">
 							{activity.type == "folder" && (

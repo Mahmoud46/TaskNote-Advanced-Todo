@@ -14,7 +14,63 @@ import {
 import type { ITask } from "../interfaces/Data.interface";
 import { Context } from "../context/Context";
 import type { IContext } from "../interfaces/Context.interface";
-import { useLocation } from "react-router-dom";
+import { useLocation, type NavigateFunction } from "react-router-dom";
+import type { Data } from "../classes/Data.class";
+
+const CardControllers = ({
+	pathname,
+	task,
+	dataController,
+	setPrevPath,
+	navigate,
+	setIsOpen,
+	isOpen,
+}: {
+	pathname: string;
+	task: ITask;
+	dataController: Data;
+	setPrevPath: React.Dispatch<React.SetStateAction<string>>;
+	navigate: NavigateFunction;
+	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+	isOpen: boolean;
+}): ReactNode => (
+	<>
+		<div
+			onClick={() => {
+				setPrevPath(pathname);
+				navigate(
+					`${pathname == "/" ? "" : pathname}/update-task/${task.task_id}`
+				);
+			}}
+			className="p-2 text-sm cursor-pointer transition duration-300 hover:bg-white hover:text-gray-900 rounded-full"
+		>
+			<LuPenLine />
+		</div>
+		<div
+			className="p-2 text-sm cursor-pointer transition duration-300 hover:bg-white hover:text-gray-900 rounded-full"
+			onClick={() => dataController.deleteTask(task.task_id)}
+		>
+			<LuTrash />
+		</div>
+		<div
+			className="p-2 text-sm cursor-pointer transition duration-300 hover:bg-white hover:text-gray-900 rounded-full"
+			onClick={() =>
+				dataController.updateTask({ ...task, is_fav: !task.is_fav })
+			}
+		>
+			{task.is_fav && <LuStarOff />}
+			{!task.is_fav && <LuStar />}
+		</div>
+		<div
+			className="p-2 text-sm cursor-pointer transition duration-300 hover:bg-white hover:text-gray-900 rounded-full"
+			onClick={() => setIsOpen((prev) => !prev)}
+		>
+			<LuChevronDown
+				className={`transition-all duration-300 ${isOpen ? "rotate-180" : ""}`}
+			/>
+		</div>
+	</>
+);
 
 export default function TaskCard({ task }: { task: ITask }): ReactNode {
 	const { dataController, setPrevPath, navigate } = useContext(
@@ -64,16 +120,20 @@ export default function TaskCard({ task }: { task: ITask }): ReactNode {
 			</div>
 			<div className="flex-1 min-w-[230px] flex flex-col items-start">
 				<div className="flex items-start gap-2 justify-between w-full">
-					<div className="">
+					{/* Left column */}
+					<div className="flex flex-col flex-1 min-w-0">
+						{/* Task Title */}
 						<p
-							className={`overflow-hidden transition-all duration-300 ${
-								isOpen ? "max-h-40" : "max-h-6"
+							className={`overflow-hidden transition-all duration-300 break-words ${
+								isOpen ? "line-clamp-none" : "line-clamp-1"
 							}`}
 						>
 							{task.title}
 						</p>
-						<div className="flex gap-2">
-							<p className="flex gap-1 text-xs items-center">
+
+						{/* Due Dates */}
+						<div className="flex gap-2 shrink-0">
+							<p className="flex gap-1 text-xs items-center shrink-0">
 								<LuCalendarClock className="text-sm" />
 								<span>
 									{new Date(task.due_date).toLocaleDateString("en-US", {
@@ -83,8 +143,9 @@ export default function TaskCard({ task }: { task: ITask }): ReactNode {
 									})}
 								</span>
 							</p>
+
 							{task.due_date.split("T").length > 1 && (
-								<p className="flex gap-1 text-xs items-center">
+								<p className="flex gap-1 text-xs items-center shrink-0">
 									<LuAlarmClock className="text-sm" />
 									<span>
 										{new Date(task.due_date).toLocaleTimeString("en-US", {
@@ -97,45 +158,18 @@ export default function TaskCard({ task }: { task: ITask }): ReactNode {
 							)}
 						</div>
 					</div>
-					<div className="flex glass rounded-full p-0.5 mt-0.5">
-						<div
-							onClick={() => {
-								setPrevPath(location.pathname);
-								navigate(
-									`${
-										location.pathname == "/" ? "" : location.pathname
-									}/update-task/${task.task_id}`
-								);
-							}}
-							className="p-2 text-sm cursor-pointer transition duration-300 hover:bg-white hover:text-gray-900 rounded-full"
-						>
-							<LuPenLine />
-						</div>
-						<div
-							className="p-2 text-sm cursor-pointer transition duration-300 hover:bg-white hover:text-gray-900 rounded-full"
-							onClick={() => dataController.deleteTask(task.task_id)}
-						>
-							<LuTrash />
-						</div>
-						<div
-							className="p-2 text-sm cursor-pointer transition duration-300 hover:bg-white hover:text-gray-900 rounded-full"
-							onClick={() =>
-								dataController.updateTask({ ...task, is_fav: !task.is_fav })
-							}
-						>
-							{task.is_fav && <LuStarOff />}
-							{!task.is_fav && <LuStar />}
-						</div>
-						<div
-							className="p-2 text-sm cursor-pointer transition duration-300 hover:bg-white hover:text-gray-900 rounded-full"
-							onClick={() => setIsOpen((prev) => !prev)}
-						>
-							<LuChevronDown
-								className={`transition-all duration-300 ${
-									isOpen ? "rotate-180" : ""
-								}`}
-							/>
-						</div>
+
+					{/* Right actions */}
+					<div className="flex glass rounded-full p-0.5 mt-0.5 flex-none">
+						<CardControllers
+							pathname={location.pathname}
+							task={task}
+							dataController={dataController}
+							setPrevPath={setPrevPath}
+							navigate={navigate}
+							setIsOpen={setIsOpen}
+							isOpen={isOpen}
+						/>
 					</div>
 				</div>
 
