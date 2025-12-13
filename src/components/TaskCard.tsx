@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState, type ReactNode } from "react";
+import { useContext, useState, type ReactNode } from "react";
 
 import {
 	LuAlarmClock,
@@ -79,13 +79,7 @@ export default function TaskCard({ task }: { task: ITask }): ReactNode {
 
 	const [isDone, setIsDone] = useState<boolean>(task.is_done);
 	const [isOpen, setIsOpen] = useState<boolean>(false);
-	const [description, setDescription] = useState<string>("");
 	const location = useLocation();
-
-	useEffect(() => {
-		setIsDone(task.is_done);
-		setDescription(task.description);
-	}, [task]);
 
 	return (
 		<div
@@ -124,7 +118,7 @@ export default function TaskCard({ task }: { task: ITask }): ReactNode {
 					<div className="flex flex-col flex-1 min-w-0">
 						{/* Task Title */}
 						<p
-							className={`overflow-hidden transition-all duration-300 break-words ${
+							className={`overflow-hidden transition-all duration-300 wrap-break-word ${
 								isOpen ? "line-clamp-none" : "line-clamp-1"
 							}`}
 						>
@@ -173,19 +167,10 @@ export default function TaskCard({ task }: { task: ITask }): ReactNode {
 					</div>
 				</div>
 
-				<div className="mt-2 py-2 border-t border-gray-600 w-full text-sm pl-1 pr-2">
-					<textarea
-						readOnly
-						className="w-full outline-0 h-fit resize-none"
-						value={description}
-						ref={(el) => {
-							if (el) {
-								el.style.height = "auto";
-								el.style.height = el.scrollHeight + "px";
-							}
-						}}
-					></textarea>
-				</div>
+				<div
+					className="mt-2 py-2 border-t border-gray-600 w-full text-sm pl-1 pr-2 wrap-break-word"
+					dangerouslySetInnerHTML={{ __html: task.description }}
+				></div>
 			</div>
 		</div>
 	);

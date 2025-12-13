@@ -9,7 +9,7 @@ import {
 	LuTrash,
 } from "react-icons/lu";
 import type { INote } from "../interfaces/Data.interface";
-import { useContext, useEffect, useState, type ReactNode } from "react";
+import { useContext, useState, type ReactNode } from "react";
 import { CustomCategoryIcon } from "../libs/icons";
 import { useLocation, type NavigateFunction } from "react-router-dom";
 import { Context } from "../context/Context";
@@ -76,12 +76,7 @@ export default function NoteCard({ note }: { note: INote }) {
 		Context
 	) as IContext;
 	const [isOpen, setIsOpen] = useState<boolean>(false);
-	const [content, setContent] = useState<string>("");
 	const location = useLocation();
-
-	useEffect(() => {
-		setContent(note.content);
-	}, [note]);
 
 	return (
 		<div
@@ -97,7 +92,7 @@ export default function NoteCard({ note }: { note: INote }) {
 				<div className="flex items-start w-full justify-between gap-2">
 					<div className="flex flex-col flex-1 min-w-0">
 						<p
-							className={`overflow-hidden transition-all duration-300 break-words ${
+							className={`overflow-hidden transition-all duration-300 wrap-break-word ${
 								isOpen ? "line-clamp-none" : "line-clamp-1"
 							}`}
 						>
@@ -144,19 +139,10 @@ export default function NoteCard({ note }: { note: INote }) {
 					</div>
 				</div>
 
-				<div className="mt-2 py-2 border-t border-gray-600 w-full text-sm pl-1">
-					<textarea
-						readOnly
-						className="w-full outline-0 h-fit resize-none"
-						value={content}
-						ref={(el) => {
-							if (el) {
-								el.style.height = "auto";
-								el.style.height = el.scrollHeight + "px";
-							}
-						}}
-					></textarea>
-				</div>
+				<div
+					className="mt-2 py-2 border-t border-gray-600 w-full text-sm pl-1 pr-2 wrap-break-word"
+					dangerouslySetInnerHTML={{ __html: note.content }}
+				></div>
 			</div>
 		</div>
 	);
