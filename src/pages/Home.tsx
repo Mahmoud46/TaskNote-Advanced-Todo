@@ -18,7 +18,7 @@ export default function Home() {
 			<div className="gap-2 rounded-2xl flex flex-col w-full lg:pr-[310px] xl:pr-[360px] relative">
 				<div className="flex glass p-2 flex-col w-full gap-2 rounded-2xl">
 					<StatsOverview />
-					<div className="flex gap-2 flex-wrap items-start">
+					<div className="flex gap-2 flex-wrap">
 						<NotesOverview />
 						<TasksOverview />
 					</div>
