@@ -41,9 +41,12 @@ export default function ProjectCard({
 					</div>
 					<div className="flex flex-col w-full">
 						<h1 className="text-base line-clamp-1">{project.title}</h1>
-						<p className="text-sm line-clamp-1 opacity-80">
-							{project.description.slice(0, 100)}
-						</p>
+						<p
+							className="text-sm line-clamp-1 opacity-80"
+							dangerouslySetInnerHTML={{
+								__html: project.html_description.slice(0, 100),
+							}}
+						></p>
 					</div>
 				</div>
 				<div className="flex items-center gap-2 pl-9 -mt-1">

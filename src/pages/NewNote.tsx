@@ -47,7 +47,11 @@ export default function NewNote(): ReactNode {
 						const noteFormData: INote = {
 							note_id: nanoid(),
 							title: `${
-								noteTitle == "" ? `${noteContent.slice(0, 20)}...` : noteTitle
+								noteTitle == ""
+									? `${noteContent.slice(0, 20)}${
+											noteContent.length > 20 ? "..." : ""
+									  }`
+									: noteTitle
 							}`,
 							content: noteContent,
 							created_at: new Date().toISOString(),

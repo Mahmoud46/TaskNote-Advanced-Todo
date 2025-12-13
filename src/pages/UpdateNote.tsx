@@ -60,7 +60,11 @@ export default function UpdateNote(): ReactNode {
 							dataController.updateNote({
 								...dataController.notesDataController.getNote(id as string),
 								title: `${
-									noteTitle == "" ? `${noteContent.slice(0, 20)}...` : noteTitle
+									noteTitle == ""
+										? `${noteContent.slice(0, 20)}${
+												noteContent.length > 20 ? "..." : ""
+										  }`
+										: noteTitle
 								}`,
 								content: noteContent,
 								updated_at: new Date().toISOString(),
