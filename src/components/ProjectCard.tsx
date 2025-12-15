@@ -7,15 +7,15 @@ import {
 	LuArrowRight,
 	LuCalendarClock,
 	LuCalendarPlus,
-	LuClipboard,
+	LuClipboardList,
 	LuFileText,
 	LuPenLine,
-	LuRocket,
 	LuTrash,
 } from "react-icons/lu";
 import { Context } from "../context/Context";
 import type { IContext } from "../interfaces/Context.interface";
 import { Link, useLocation } from "react-router-dom";
+import { GrCubes } from "react-icons/gr";
 
 export default function ProjectCard({
 	project,
@@ -33,11 +33,14 @@ export default function ProjectCard({
 					{PROJECT_STATUS_MAP[project.status]}
 				</p>
 				<div className="flex gap-2 items-center">
-					<div className="text-xl px-1">
-						{project.category && (
-							<CustomCategoryIcon category={project.category} />
-						)}
-						{!project.category && <LuRocket />}
+					<div className="relative rounded-full flex p-2">
+						<GrCubes className="flex-none text-2xl" />
+						<div className="text-xs absolute bg-white aspect-square text-gray-900 p-1 rounded-full right-0 bottom-0">
+							{project.category && (
+								<CustomCategoryIcon category={project.category} />
+							)}
+							{!project.category && <GrCubes />}
+						</div>
 					</div>
 					<div className="flex flex-col w-full">
 						<h1 className="text-base line-clamp-1">{project.title}</h1>
@@ -89,7 +92,7 @@ export default function ProjectCard({
 				</div>
 				<div className="flex gap-2 items-center pl-9 mt-1">
 					<p className="flex gap-1 items-center text-xs">
-						<LuClipboard className="text-sm" />
+						<LuClipboardList className="text-sm" />
 						<span>{project.tasks.length}</span>
 					</p>
 					<p className="flex gap-1 items-center text-xs">

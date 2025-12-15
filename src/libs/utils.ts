@@ -141,3 +141,10 @@ export function activitiesDataCategorization(activities: IActivity[]): {
 		),
 	}));
 }
+
+export const dateFormat = (date: string): string =>
+	new Date(date).toLocaleDateString("en-US", {
+		year: "numeric",
+		month: "short",
+		day: "numeric",
+	});

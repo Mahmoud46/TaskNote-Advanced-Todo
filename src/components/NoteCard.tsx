@@ -84,9 +84,12 @@ export default function NoteCard({ note }: { note: INote }) {
 				isOpen ? "max-h-[1000px]" : ""
 			}`}
 		>
-			<div className="rounded-full flex p-2 pt-3 text-lg">
-				{note.category && <CustomCategoryIcon category={note.category} />}
-				{!note.category && <LuFileText />}
+			<div className="relative rounded-full flex p-2 pt-3">
+				<LuFileText className="flex-none text-xl" />
+				<div className="text-xs absolute bg-white aspect-square text-gray-900 p-1 rounded-full right-0 bottom-0">
+					{note.category && <CustomCategoryIcon category={note.category} />}
+					{!note.category && <LuFileText />}
+				</div>
 			</div>
 			<div className="w-full min-w-[220px] flex flex-col items-start">
 				<div className="flex items-start w-full justify-between gap-2">
@@ -140,8 +143,10 @@ export default function NoteCard({ note }: { note: INote }) {
 				</div>
 
 				<div
-					className="mt-2 py-2 border-t border-gray-600 w-full text-sm pl-1 pr-2 wrap-break-word"
-					dangerouslySetInnerHTML={{ __html: note.content }}
+					className="mt-2 py-2 border-t border-gray-600 w-full text-sm pl-1 pr-2 wrap-break-word whitespace-pre-wrap description"
+					dangerouslySetInnerHTML={{
+						__html: note.html_content ?? note.content,
+					}}
 				></div>
 			</div>
 		</div>

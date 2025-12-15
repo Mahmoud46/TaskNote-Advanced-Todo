@@ -63,7 +63,7 @@ body {
 		}
 
 		.description a {
-			@apply hover:text-blue-300;
+			@apply text-gray-300 hover:text-blue-300;
 		}
 	}
 }

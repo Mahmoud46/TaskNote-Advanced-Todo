@@ -80,7 +80,6 @@ export default function NewProject(): ReactNode {
 							);
 						}
 
-						console.log(projectFormData);
 						dataController.createProject(projectFormData);
 						navigate(prevPath);
 					}}

@@ -32,7 +32,6 @@ import {
 	LuTriangleAlert,
 	LuAsterisk,
 	LuFolders,
-	LuRocket,
 	LuLoader,
 	LuClipboardCheck,
 	LuClipboard,
@@ -71,6 +70,7 @@ import {
 	SiVercel,
 	SiYoutube,
 } from "react-icons/si";
+import { GrCubes } from "react-icons/gr";
 
 export function CustomCategoryIcon({
 	category,
@@ -165,7 +165,7 @@ export function StatIcon({
 		case "Total folders":
 			return <LuFolders className={className} />;
 		case "Total projects":
-			return <LuRocket className={className} />;
+			return <GrCubes className={className} />;
 		case "Ongoing projects":
 			return <LuLoader className={className} />;
 		case "Upcoming projects":

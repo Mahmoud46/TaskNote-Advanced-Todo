@@ -6,18 +6,18 @@ import {
 	LuArrowRight,
 	LuCalendarPlus,
 	LuCalendarSync,
-	LuClipboard,
+	LuClipboardList,
 	LuFileText,
 	LuFolder,
 	LuFolderPlus,
 	LuFolderX,
 	LuPenLine,
 	LuPlus,
-	LuRocket,
 	LuSearch,
 	LuTrash,
 } from "react-icons/lu";
 import { CustomCategoryIcon } from "../libs/icons";
+import { GrCubes } from "react-icons/gr";
 
 export default function Folders(): ReactNode {
 	const { dataController, setPrevPath, navigate } = useContext(
@@ -102,11 +102,16 @@ export default function Folders(): ReactNode {
 											</div>
 											<div className="p-2 flex gap-2 flex-col">
 												<div className="flex gap-2 items-center">
-													<div className="text-xl px-1">
-														{folder.category && (
-															<CustomCategoryIcon category={folder.category} />
-														)}
-														{!folder.category && <LuFolder />}
+													<div className="relative rounded-full flex p-2">
+														<LuFolder className="flex-none text-2xl" />
+														<div className="text-xs absolute bg-white aspect-square text-gray-900 p-1 rounded-full right-0 bottom-0">
+															{folder.category && (
+																<CustomCategoryIcon
+																	category={folder.category}
+																/>
+															)}
+															{!folder.category && <LuFolder />}
+														</div>
 													</div>
 													<div className="">
 														<h1 className="text-base line-clamp-1">
@@ -146,11 +151,11 @@ export default function Folders(): ReactNode {
 												</div>
 												<div className="flex gap-2 items-center pl-9 mt-1">
 													<p className="flex gap-1 items-center text-xs">
-														<LuRocket className="text-sm" />
+														<GrCubes className="text-sm" />
 														<span>{folder.projects.length}</span>
 													</p>
 													<p className="flex gap-1 items-center text-xs">
-														<LuClipboard className="text-sm" />
+														<LuClipboardList className="text-sm" />
 														<span>{folder.tasks.length}</span>
 													</p>
 													<p className="flex gap-1 items-center text-xs">

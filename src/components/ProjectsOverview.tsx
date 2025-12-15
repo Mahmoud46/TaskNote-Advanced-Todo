@@ -8,17 +8,23 @@ import {
 } from "react-icons/lu";
 import { Context } from "../context/Context";
 import type { IContext } from "../interfaces/Context.interface";
-import { CustomCategoryIcon } from "../libs/icons";
-import type { IProject, TCustomCategory } from "../interfaces/Data.interface";
+import type { IProject } from "../interfaces/Data.interface";
 import { Link } from "react-router-dom";
+import CircularProgressPieChart from "./CircularProgressPieChart";
+import { getProgressPercentageWithRespect2Date } from "../libs/utils";
 
 const ProjectOverviewCard = ({ project }: { project: IProject }) => (
-	<div className="glass p-2 rounded-xl rounded-tr-3xl flex items-center gap-2">
-		<div className="text-xl mr-1 mt-0.5">
-			{project.category && (
-				<CustomCategoryIcon category={project.category as TCustomCategory} />
-			)}
-			{!project.category && <LuRocket />}
+	<div className="glass p-2 rounded-xl rounded-tr-3xl flex items-start gap-2">
+		<div className="h-[45px] aspect-square relative">
+			<CircularProgressPieChart
+				labelStylingClassName="text-xs font-semibold"
+				putPercentageSign={false}
+				progress={getProgressPercentageWithRespect2Date(
+					new Date(project.start_date),
+					new Date(project.due_date),
+					new Date()
+				)}
+			/>
 		</div>
 		<div className="flex items-start flex-1 gap-2">
 			<div className="flex-1">

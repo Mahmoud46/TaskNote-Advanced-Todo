@@ -13,6 +13,7 @@ import {
 } from "react-icons/lu";
 import { Link, useParams } from "react-router-dom";
 import type {
+	ITask,
 	TCustomCategory,
 	TTaskPriority,
 } from "../interfaces/Data.interface";
@@ -20,6 +21,7 @@ import { CustomCategoryIcon } from "../libs/icons";
 import { CUSTOME_CATEGRIES } from "../constants/data";
 import type { IContext } from "../interfaces/Context.interface";
 import { Context } from "../context/Context";
+import { extractLinks, replaceLinksInSentence } from "../libs/utils";
 
 export default function UpdateTask(): ReactNode {
 	const { id } = useParams();
@@ -92,7 +94,7 @@ export default function UpdateTask(): ReactNode {
 						className="p-2 flex flex-col gap-2"
 						onSubmit={(e) => {
 							e.preventDefault();
-							dataController.updateTask({
+							const taskFormData: ITask = {
 								...dataController.tasksDataController.getTask(id as string),
 								title: taskTitle,
 								description: taskDescription,
@@ -103,7 +105,14 @@ export default function UpdateTask(): ReactNode {
 								priority: taskPriority,
 								updated_at: new Date().toISOString(),
 								category: taskCategory,
-							});
+							};
+							if (taskDescription) {
+								taskFormData.html_description = replaceLinksInSentence(
+									taskFormData.description,
+									extractLinks(taskDescription)
+								);
+							}
+							dataController.updateTask(taskFormData);
 							navigate(prevPath);
 						}}
 					>

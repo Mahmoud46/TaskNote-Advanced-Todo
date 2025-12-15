@@ -4,13 +4,9 @@ import type {
 	TProjectStatus,
 	TTaskPriority,
 } from "../interfaces/Data.interface";
-import {
-	LuClipboardList,
-	LuFiles,
-	LuFolders,
-	LuHouse,
-	LuRocket,
-} from "react-icons/lu";
+import { LuClipboardList, LuFiles, LuFolders, LuHouse } from "react-icons/lu";
+
+import { GrCubes } from "react-icons/gr";
 
 export const PAGES_MENU_PATHS: {
 	title: string;
@@ -19,7 +15,7 @@ export const PAGES_MENU_PATHS: {
 }[] = [
 	{ title: "Home", icon: LuHouse, path: "/" },
 	{ title: "Folders", icon: LuFolders, path: "/folders" },
-	{ title: "Projects", icon: LuRocket, path: "/projects" },
+	{ title: "Projects", icon: GrCubes, path: "/projects" },
 	{ title: "Tasks", icon: LuClipboardList, path: "/tasks" },
 	{ title: "Notes", icon: LuFiles, path: "/notes" },
 ];

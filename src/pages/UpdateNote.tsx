@@ -8,11 +8,12 @@ import {
 	LuX,
 } from "react-icons/lu";
 import { Link, useParams } from "react-router-dom";
-import type { TCustomCategory } from "../interfaces/Data.interface";
+import type { INote, TCustomCategory } from "../interfaces/Data.interface";
 import { CustomCategoryIcon } from "../libs/icons";
 import { CUSTOME_CATEGRIES } from "../constants/data";
 import { Context } from "../context/Context";
 import type { IContext } from "../interfaces/Context.interface";
+import { extractLinks, replaceLinksInSentence } from "../libs/utils";
 
 export default function UpdateNote(): ReactNode {
 	const { id } = useParams();
@@ -57,7 +58,7 @@ export default function UpdateNote(): ReactNode {
 						className="p-2 flex flex-col gap-2"
 						onSubmit={(e) => {
 							e.preventDefault();
-							dataController.updateNote({
+							const noteFormData: INote = {
 								...dataController.notesDataController.getNote(id as string),
 								title: `${
 									noteTitle == ""
@@ -69,7 +70,16 @@ export default function UpdateNote(): ReactNode {
 								content: noteContent,
 								updated_at: new Date().toISOString(),
 								category: noteCategory,
-							});
+							};
+
+							if (noteContent) {
+								noteFormData.html_content = replaceLinksInSentence(
+									noteFormData.content,
+									extractLinks(noteContent)
+								);
+							}
+
+							dataController.updateNote(noteFormData);
 							navigate(prevPath);
 						}}
 					>

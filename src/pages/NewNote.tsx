@@ -13,6 +13,7 @@ import { CUSTOME_CATEGRIES } from "../constants/data";
 import { nanoid } from "nanoid";
 import { Context } from "../context/Context";
 import type { IContext } from "../interfaces/Context.interface";
+import { extractLinks, replaceLinksInSentence } from "../libs/utils";
 
 export default function NewNote(): ReactNode {
 	const [searchParams] = useSearchParams();
@@ -61,6 +62,13 @@ export default function NewNote(): ReactNode {
 
 						if (folderID) noteFormData.folder_id = folderID;
 						if (projectID) noteFormData.project_id = projectID;
+
+						if (noteContent) {
+							noteFormData.html_content = replaceLinksInSentence(
+								noteFormData.content,
+								extractLinks(noteContent)
+							);
+						}
 
 						dataController.createNote(noteFormData);
 						navigate(prevPath);

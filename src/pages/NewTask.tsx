@@ -21,6 +21,7 @@ import { CUSTOME_CATEGRIES } from "../constants/data";
 import { nanoid } from "nanoid";
 import type { IContext } from "../interfaces/Context.interface";
 import { Context } from "../context/Context";
+import { extractLinks, replaceLinksInSentence } from "../libs/utils";
 
 export default function NewTask(): ReactNode {
 	const [searchParams] = useSearchParams();
@@ -72,6 +73,12 @@ export default function NewTask(): ReactNode {
 
 						if (folderID) taskFormData.folder_id = folderID;
 						if (projectID) taskFormData.project_id = projectID;
+						if (taskDescription) {
+							taskFormData.html_description = replaceLinksInSentence(
+								taskFormData.description,
+								extractLinks(taskDescription)
+							);
+						}
 
 						dataController.createTask(taskFormData);
 						navigate(prevPath);

@@ -2,8 +2,14 @@ import { Cell, Pie, PieChart, ResponsiveContainer } from "recharts";
 import { getProgressColor } from "../libs/utils";
 export default function CircularProgressPieChart({
 	progress,
+	labelStylingClassName,
+	putPercentageSign = true,
+	showLabel = true,
 }: {
 	progress: number;
+	labelStylingClassName: string;
+	putPercentageSign?: boolean;
+	showLabel?: boolean;
 }) {
 	const data = [
 		{ name: "Completed", value: progress },
@@ -14,9 +20,12 @@ export default function CircularProgressPieChart({
 
 	return (
 		<div className="absolute bg-theme-foreground w-full h-full glass rounded-full">
-			<p className="absolute left-[50%] top-[50%] -translate-[50%] text-center text-lg leading-4 opacity-70">
-				<span className="text-4xl">{progress.toFixed(0)}</span>%
-			</p>
+			{showLabel && (
+				<p className="absolute left-[50%] top-[50%] -translate-[50%] text-center text-xs leading-4 opacity-70">
+					<span className={labelStylingClassName}>{progress.toFixed(0)}</span>
+					{putPercentageSign && "%"}
+				</p>
+			)}
 			<ResponsiveContainer height={"100%"} width={"100%"}>
 				<PieChart>
 					<Pie
@@ -25,7 +34,7 @@ export default function CircularProgressPieChart({
 						nameKey="name"
 						cx="50%"
 						cy="50%"
-						innerRadius="90%"
+						innerRadius="80%"
 						outerRadius={"100%"}
 						paddingAngle={10}
 						startAngle={90}

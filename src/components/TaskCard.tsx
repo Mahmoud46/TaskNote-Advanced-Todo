@@ -1,4 +1,4 @@
-import { useContext, useState, type ReactNode } from "react";
+import { useContext, useEffect, useState, type ReactNode } from "react";
 
 import {
 	LuAlarmClock,
@@ -81,9 +81,17 @@ export default function TaskCard({ task }: { task: ITask }): ReactNode {
 	const [isOpen, setIsOpen] = useState<boolean>(false);
 	const location = useLocation();
 
+	useEffect(() => {
+		setIsDone(task.is_done);
+	}, [task]);
+
 	return (
 		<div
-			className={`glass flex gap-2 items-start p-1 rounded-2xl transition-all duration-300 ease-in-out max-h-[51px] overflow-hidden flex-none ${
+			className={`${
+				dataController.tasksDataController.stats.overdue.includes(task.task_id)
+					? "bg-red-500/10 border border-red-500/30 backdrop-blur-md"
+					: "glass"
+			} flex gap-2 items-start p-1 rounded-2xl transition-all duration-300 ease-in-out max-h-[51px] overflow-hidden flex-none ${
 				isOpen ? "max-h-[1000px]" : ""
 			}`}
 		>
@@ -168,8 +176,10 @@ export default function TaskCard({ task }: { task: ITask }): ReactNode {
 				</div>
 
 				<div
-					className="mt-2 py-2 border-t border-gray-600 w-full text-sm pl-1 pr-2 wrap-break-word"
-					dangerouslySetInnerHTML={{ __html: task.description }}
+					className="mt-2 py-2 border-t border-gray-600 w-full text-sm pl-1 pr-2 wrap-break-word whitespace-pre-wrap description"
+					dangerouslySetInnerHTML={{
+						__html: task.html_description ?? task.description,
+					}}
 				></div>
 			</div>
 		</div>

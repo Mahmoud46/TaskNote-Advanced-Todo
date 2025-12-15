@@ -22,7 +22,7 @@ export interface IProject {
 	status: TProjectStatus;
 	title: string;
 	description: string;
-	html_description:string
+	html_description: string;
 	tasks: string[]; // Tasks IDs
 	notes: string[]; // Notes IDs
 	links?: string[];
@@ -40,7 +40,7 @@ export interface INote {
 	note_id: string;
 	title: string;
 	content: string;
-
+	html_content?: string;
 	created_at: string;
 	updated_at?: string;
 	category?: TCustomCategory;
@@ -55,6 +55,7 @@ export interface ITask {
 	task_id: string;
 	title: string;
 	description: string;
+	html_description?: string;
 
 	due_date: string; // Deadline (ISO format)
 	is_done: boolean; // Status of the task

@@ -65,11 +65,14 @@ export default function FoldersOverview(): ReactNode {
 										</Link>
 									</div>
 									<div className="p-2 flex gap-2 items-center">
-										<div className="text-xl px-1">
-											{folder.category && (
-												<CustomCategoryIcon category={folder.category} />
-											)}
-											{!folder.category && <LuFolder />}
+										<div className="relative rounded-full flex p-2">
+											<LuFolder className="flex-none text-2xl" />
+											<div className="text-xs absolute bg-white aspect-square text-gray-900 p-1 rounded-full right-0 bottom-0">
+												{folder.category && (
+													<CustomCategoryIcon category={folder.category} />
+												)}
+												{!folder.category && <LuFolder />}
+											</div>
 										</div>
 										<div className="">
 											<h1 className="text-base line-clamp-1">{folder.title}</h1>
