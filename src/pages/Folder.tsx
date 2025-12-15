@@ -39,31 +39,8 @@ const FolderPageHeader = ({
 	navigate: NavigateFunction;
 	setPrevPath: React.Dispatch<React.SetStateAction<string>>;
 }) => (
-	<div className="flex items-center gap-2 w-full justify-between">
-		<div className="flex items-center gap-4">
-			<div className="text-3xl relative p-2">
-				<LuFolder />
-				<div className="text-sm absolute right-0 bottom-0 bg-white p-1 text-gray-900 rounded-full">
-					<CustomCategoryIcon category={folder.category ?? "Work"} />
-				</div>
-			</div>
-			<div className="">
-				<h1 className="text-2xl">{folder.title}</h1>
-				<div className="flex gap-4 items-center">
-					<p className="flex items-center gap-2 text-sm">
-						<LuCalendarPlus className="text-base" />
-						<span>{dateFormat(folder.created_at)}</span>
-					</p>
-					{folder.updated_at && (
-						<p className="flex items-center gap-2 text-sm">
-							<LuCalendarSync className="text-base" />
-							<span>{dateFormat(folder.updated_at)}</span>
-						</p>
-					)}
-				</div>
-			</div>
-		</div>
-		<div className="flex items-center">
+	<div className="flex gap-2 w-full flex-col">
+		<div className="flex items-center self-end">
 			<div
 				onClick={() => {
 					setPrevPath(location.pathname);
@@ -95,6 +72,29 @@ const FolderPageHeader = ({
 				<span className="glass p-1 px-2 rounded-full opacity-0 transition duration-400 group-hover:opacity-100 w-max flex-none">
 					Delete
 				</span>
+			</div>
+		</div>
+		<div className="flex items-center gap-4">
+			<div className="text-3xl relative p-2">
+				<LuFolder />
+				<div className="text-sm absolute right-0 bottom-0 bg-white p-1 text-gray-900 rounded-full">
+					<CustomCategoryIcon category={folder.category ?? "Work"} />
+				</div>
+			</div>
+			<div className="flex flex-col gap-2">
+				<h1 className="text-xl sm:text-3xl">{folder.title}</h1>
+				<div className="flex gap-4 items-center">
+					<p className="flex items-center gap-2 text-xs sm:text-sm">
+						<LuCalendarPlus className="text-sm sm:text-base" />
+						<span>{dateFormat(folder.created_at)}</span>
+					</p>
+					{folder.updated_at && (
+						<p className="flex items-center gap-2 text-xs sm:text-sm">
+							<LuCalendarSync className="text-sm sm:text-base" />
+							<span>{dateFormat(folder.updated_at)}</span>
+						</p>
+					)}
+				</div>
 			</div>
 		</div>
 	</div>

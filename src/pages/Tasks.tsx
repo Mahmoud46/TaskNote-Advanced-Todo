@@ -272,9 +272,9 @@ export const TasksHolderBody = ({
 						folderID={folderID}
 						projectID={projectID}
 					/>
-					<div className="flex w-full gap-2 flex-wrap items-start pl-0 md:pl-10">
-						<TasksStats tasks={tasks} />
-						<div className="flex-1 min-w-[300px]">
+					<div className="flex w-full gap-2 flex-wrap items-start pl-0 md:pl-10 justify-center">
+						{location.pathname == "/tasks" && <TasksStats tasks={tasks} />}
+						<div className="flex-1 min-w-[300px] max-w-[700px]">
 							{tabSelector == "Tasks" && (
 								<TasksList
 									tasks={tasks.filter(

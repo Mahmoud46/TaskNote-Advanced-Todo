@@ -238,7 +238,7 @@ export const NotesHolderBody = ({
 					/>
 
 					<div className="flex justify-center">
-						<div className="flex w-full gap-2 items-start flex-wrap max-w-[800px]">
+						<div className="flex w-full gap-2 items-start flex-wrap max-w-[700px]">
 							{tabSelector == "Notes" && (
 								<NotesList
 									notes={notes.filter(
