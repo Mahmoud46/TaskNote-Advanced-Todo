@@ -98,4 +98,15 @@ npm run dev
 
 The application will be available at `http://localhost:5173` (or the port shown in your terminal).
 
+---
+
+## 📌 Use Cases
+
+- Personal task and note tracking
+- Student project organization
+- Lightweight project planning
+- Daily productivity management
+
+---
+
 **TaskNote** – Simple, structured, and efficient task & note management.
