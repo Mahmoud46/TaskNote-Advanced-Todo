@@ -22,11 +22,15 @@ import {
 import { CustomCategoryIcon } from "../libs/icons";
 import { GrCubes } from "react-icons/gr";
 import type { IFolder } from "../interfaces/Data.interface";
-import { dateFormat } from "../libs/utils";
+import {
+	dateFormat,
+	getTasksCategorizationWithColor,
+	getTasksPriosWithColor,
+} from "../libs/utils";
 import type { Data } from "../classes/Data.class";
-import { NotesHolderBody } from "./Notes";
-import { TasksHolderBody } from "./Tasks";
+import TasksHolderBody from "../components/TasksHolderBody";
 import { ProjectsHolderBody } from "./Projects";
+import NotesHolderBody from "../components/NotesHolderBody";
 
 const FolderPageHeader = ({
 	dataController,
@@ -216,6 +220,16 @@ const Content = ({
 				navigate={navigate}
 				setPrevPath={setPrevPath}
 				folderID={folder.folder_id}
+				dataCat={getTasksCategorizationWithColor(
+					dataController.tasksDataController.tasks.filter((task) =>
+						folder.tasks.includes(task.task_id)
+					)
+				)}
+				dataPrios={getTasksPriosWithColor(
+					dataController.tasksDataController.tasks.filter((task) =>
+						folder.tasks.includes(task.task_id)
+					)
+				)}
 			/>
 		)}
 	</div>

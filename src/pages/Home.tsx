@@ -4,13 +4,14 @@ import StatsOverview from "../components/StatsOverview";
 import ProjectsOverview from "../components/ProjectsOverview";
 import FoldersOverview from "../components/FoldersOverview";
 
-import OverviewPieChartContainer from "../components/OverviewPieChartContainer";
+import TasksProjectsOverviewPieChartContainer from "../components/TasksProjectsOverviewPieChartContainer";
 import DailyActivityLineChart from "../components/DailyActivityLineChart";
 
 import { Outlet } from "react-router-dom";
 import RecentActivites from "../components/RecentActivites";
 import NotesOverview from "../components/NotesOverview";
 import TasksOverview from "../components/TasksOverview";
+import TodaysEvents from "../components/TodaysEvents";
 
 export default function Home() {
 	return (
@@ -27,7 +28,7 @@ export default function Home() {
 						<div className="flex-1 relative min-h-[250px] min-w-[250px]">
 							<DailyActivityLineChart />
 						</div>
-						<OverviewPieChartContainer />
+						<TasksProjectsOverviewPieChartContainer />
 					</div>
 					<div className="flex items-start gap-2 flex-wrap">
 						<FoldersOverview />
@@ -35,11 +36,12 @@ export default function Home() {
 					</div>
 				</div>
 
-				<div className="glass w-[300px] xl:w-[350px] fixed right-8 p-2 rounded-2xl hidden lg:flex flex-col gap-2 max-h-[550px] overflow-auto hide-scroll">
+				<div className="glass w-[300px] xl:w-[350px] fixed right-8 p-2 rounded-2xl hidden lg:flex flex-col gap-2 max-h-[85dvh] overflow-auto">
 					<NowDateTime />
 					{/* <div className="glass h-[200px] flex-none rounded-2xl p-2">
 						Calendar
 					</div> */}
+					<TodaysEvents />
 					<RecentActivites />
 				</div>
 

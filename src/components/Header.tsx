@@ -13,8 +13,8 @@ export default function Header(): ReactNode {
 				>
 					<img src={logo} alt="tasknote" className="h-4" />
 					<p className="text-lg font-semibold">
-						<span>Task</span>
-						<span className="italic">Note</span>
+						<span className="italic">Task</span>
+						<span>Note</span>
 					</p>
 				</Link>
 

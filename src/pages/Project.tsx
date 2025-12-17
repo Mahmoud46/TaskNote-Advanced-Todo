@@ -17,19 +17,20 @@ import {
 	LuRocket,
 	LuTrash,
 } from "react-icons/lu";
-
 import { Icon } from "../libs/icons";
 import CircularProgressPieChart from "../components/CircularProgressPieChart";
 import {
 	dateFormat,
 	getPlatformName,
 	getProgressPercentageWithRespect2Date,
+	getTasksCategorizationWithColor,
+	getTasksPriosWithColor,
 } from "../libs/utils";
 import { PROJECT_STATUS_COLOR, PROJECT_STATUS_MAP } from "../constants/data";
 import type { IProject } from "../interfaces/Data.interface";
 import type { Data } from "../classes/Data.class";
-import { NotesHolderBody } from "./Notes";
-import { TasksHolderBody } from "./Tasks";
+import TasksHolderBody from "../components/TasksHolderBody";
+import NotesHolderBody from "../components/NotesHolderBody";
 
 const ProjectPageHeader = ({
 	dataController,
@@ -224,6 +225,16 @@ const Content = ({
 				navigate={navigate}
 				setPrevPath={setPrevPath}
 				projectID={project.project_id}
+				dataCat={getTasksCategorizationWithColor(
+					dataController.tasksDataController.tasks.filter((task) =>
+						project.tasks.includes(task.task_id)
+					)
+				)}
+				dataPrios={getTasksPriosWithColor(
+					dataController.tasksDataController.tasks.filter((task) =>
+						project.tasks.includes(task.task_id)
+					)
+				)}
 			/>
 		)}
 	</div>

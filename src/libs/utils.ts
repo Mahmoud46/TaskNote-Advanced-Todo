@@ -1,4 +1,10 @@
-import type { IActivity } from "../interfaces/Data.interface";
+import type { ITasksStats } from "../classes/Tasks.class";
+import type { TasksProjectsCatWithColorStats } from "../components/PieChartContainer";
+import type {
+	IActivity,
+	ITask,
+	TTaskPriority,
+} from "../interfaces/Data.interface";
 
 export const toggleTheme = (): void => {
 	const root = document.documentElement;
@@ -148,3 +154,79 @@ export const dateFormat = (date: string): string =>
 		month: "short",
 		day: "numeric",
 	});
+
+export const getTasksStats = (tasks: ITask[]): ITasksStats => {
+	const stats: ITasksStats = { ongoing: [], overdue: [], completed: [] };
+	for (const task of tasks) {
+		const now = new Date();
+		const due = new Date(task.due_date);
+		if (task.is_done) stats.completed.push(task.task_id);
+		if (!task.is_done && due < now) stats.overdue.push(task.task_id);
+		if (!task.is_done && due >= now) stats.ongoing.push(task.task_id);
+	}
+	return stats;
+};
+
+export const getTasksPrios = (
+	tasks: ITask[]
+): Record<TTaskPriority, number> => {
+	const stats: Record<TTaskPriority, number> = {
+		High: 0,
+		Low: 0,
+		Medium: 0,
+	};
+	for (const task of tasks) stats[task.priority] += 1;
+
+	return stats;
+};
+
+export const getTasksCategorizationWithColor = (
+	tasks: ITask[]
+): TasksProjectsCatWithColorStats[] => {
+	const tasksStats: ITasksStats = getTasksStats(tasks);
+
+	return [
+		{
+			category: "Ongoing",
+			count: tasksStats.ongoing.length,
+			color: "#0088FE",
+		},
+		{
+			category: "Completed",
+			count: tasksStats.completed.length,
+			color: "#00C49F",
+		},
+		{
+			category: "Overdue",
+			count: tasksStats.overdue.length,
+			color: "#EF4444",
+		},
+	];
+};
+
+export const getTasksPriosWithColor = (
+	tasks: ITask[]
+): TasksProjectsCatWithColorStats[] => {
+	const tasksStats: Record<TTaskPriority, number> = getTasksPrios(tasks);
+
+	return [
+		{
+			category: "Low",
+			count: tasksStats.Low,
+			color: "#00C49F",
+		},
+		{
+			category: "Medium",
+			count: tasksStats.Medium,
+			color: "#FFBB28",
+		},
+		{
+			category: "High",
+			count: tasksStats.High,
+			color: "#EF4444",
+		},
+	];
+};
+
+export const sumNums = (...args: number[]) =>
+	args.reduce((acc, cur) => acc + cur, 0);

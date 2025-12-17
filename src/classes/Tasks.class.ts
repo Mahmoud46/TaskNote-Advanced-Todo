@@ -1,7 +1,7 @@
 import { PRIORITY_MAP } from "../constants/data";
 import type { ITask } from "../interfaces/Data.interface";
 
-interface ITasksStats {
+export interface ITasksStats {
 	overdue: string[];
 	ongoing: string[];
 	completed: string[];
