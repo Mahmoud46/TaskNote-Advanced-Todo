@@ -149,76 +149,79 @@ const TasksControllersAndSelectors = ({
 				</span>
 			</button>
 		</div>
-		{tabSelector != "Stats" && (
-			<div className="flex justify-end flex-wrap">
-				<div className="glass relative rounded-full pr-2">
-					<div className="absolute opacity-80 top-1/2 -translate-y-1/2 left-2">
-						<LuSearch />
+
+		<div className="flex justify-end flex-wrap">
+			{tabSelector != "Stats" && (
+				<>
+					<div className="glass relative rounded-full pr-2">
+						<div className="absolute opacity-80 top-1/2 -translate-y-1/2 left-2">
+							<LuSearch />
+						</div>
+						<input
+							type="text"
+							value={searchTitle}
+							onChange={(e) => setSearchTitle(e.target.value)}
+							placeholder="Search task with title..."
+							className="outline-0 p-2 pl-8 text-sm max-w-[150px] lg:max-w-max"
+						/>
 					</div>
-					<input
-						type="text"
-						value={searchTitle}
-						onChange={(e) => setSearchTitle(e.target.value)}
-						placeholder="Search task with title..."
-						className="outline-0 p-2 pl-8 text-sm max-w-[150px] lg:max-w-max"
-					/>
-				</div>
-				<div className="glass relative rounded-full pr-2">
-					<LuFlag className="absolute opacity-80 top-1/2 -translate-y-1/2 left-2" />
-					<select
-						className="cursor-pointer outline-0 p-2 pl-8 text-sm"
-						onChange={(e) =>
-							setTaskPriority(e.target.value as "All" | TTaskPriority)
-						}
-						value={taskPriority}
-					>
-						<option value="All" className="bg-white text-gray-900">
-							All
-						</option>
-						<option
-							value={"Low"}
-							className="bg-white text-gray-900 cursor-pointer"
+					<div className="glass relative rounded-full pr-2">
+						<LuFlag className="absolute opacity-80 top-1/2 -translate-y-1/2 left-2" />
+						<select
+							className="cursor-pointer outline-0 p-2 pl-8 text-sm"
+							onChange={(e) =>
+								setTaskPriority(e.target.value as "All" | TTaskPriority)
+							}
+							value={taskPriority}
 						>
-							Low
-						</option>
-						<option
-							value={"Medium"}
-							className="bg-white text-gray-900 cursor-pointer"
-						>
-							Medium
-						</option>
-						<option
-							value={"High"}
-							className="bg-white text-gray-900 cursor-pointer"
-						>
-							High
-						</option>
-					</select>
-				</div>
-				<div
-					onClick={() => {
-						setPrevPath(locationPathname);
-						navigate(
-							`${locationPathname}/new-task${
-								folderID || projectID
-									? `?${[
-											folderID && `folder_id=${folderID}`,
-											projectID && `project_id=${projectID}`,
-									  ]
-											.filter(Boolean)
-											.join("&")}`
-									: ""
-							}`
-						);
-					}}
-					className="glass p-0.5 cursor-pointer rounded-full group"
-				>
-					<div className="p-2 transition duration-300 rounded-full group-hover:bg-white group-hover:text-gray-900">
-						<LuPlus className="text-lg" />
+							<option value="All" className="bg-white text-gray-900">
+								All
+							</option>
+							<option
+								value={"Low"}
+								className="bg-white text-gray-900 cursor-pointer"
+							>
+								Low
+							</option>
+							<option
+								value={"Medium"}
+								className="bg-white text-gray-900 cursor-pointer"
+							>
+								Medium
+							</option>
+							<option
+								value={"High"}
+								className="bg-white text-gray-900 cursor-pointer"
+							>
+								High
+							</option>
+						</select>
 					</div>
+				</>
+			)}
+			<div
+				onClick={() => {
+					setPrevPath(locationPathname);
+					navigate(
+						`${locationPathname}/new-task${
+							folderID || projectID
+								? `?${[
+										folderID && `folder_id=${folderID}`,
+										projectID && `project_id=${projectID}`,
+								  ]
+										.filter(Boolean)
+										.join("&")}`
+								: ""
+						}`
+					);
+				}}
+				className="glass p-0.5 cursor-pointer rounded-full group"
+			>
+				<div className="p-2 transition duration-300 rounded-full group-hover:bg-white group-hover:text-gray-900">
+					<LuPlus className="text-lg" />
 				</div>
 			</div>
-		)}
+		</div>
 	</div>
 );
 
