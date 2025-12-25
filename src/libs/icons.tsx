@@ -64,6 +64,7 @@ import type { ReactNode } from "react";
 import type { TStat } from "../classes/Data.class";
 import {
 	SiFacebook,
+	SiGithub,
 	SiInstagram,
 	SiLinkedin,
 	SiUdemy,
@@ -258,6 +259,8 @@ export const Icon = ({
 			return <SiInstagram className={className} />;
 		case "vercel":
 			return <SiVercel className={className} />;
+		case "github":
+			return <SiGithub className={className} />;
 
 		default:
 			return <LuGlobe className={className} />;
