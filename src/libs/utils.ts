@@ -96,6 +96,7 @@ export function getPlatformName(url: string) {
 	else if (url.includes("x.com") || url.includes("twitter"))
 		return "Twitter / X";
 	else if (url.includes("vercel")) return "Vercel";
+	else if (url.includes("github")) return "GitHub";
 	else return "Website";
 }
 
