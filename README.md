@@ -53,20 +53,20 @@ TaskNote is a modern, lightweight web application designed to help users efficie
 
 ## 📂 Application Structure
 
-- **Folders**
-
-  - Can contain projects, tasks, and notes
-
-- **Projects**
-
-  - Belong to a specific folder
-  - Can include related tasks and notes
-
-- **Tasks & Notes**
-
-  - Can exist independently or be linked to a project
-
-This hierarchical structure helps keep data organized and easy to manage as complexity grows.
+```bash
+src/
+│── assets/
+│── classes/
+│── components/
+│── constants/
+│── context/ # Context API providers
+│── interface/
+│── libs/
+│── pages/
+│── App.tsx # Root component
+│── index.css
+└── main.tsx # Application entry point
+```
 
 ---
 
