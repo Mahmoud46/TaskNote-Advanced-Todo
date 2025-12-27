@@ -11,9 +11,9 @@ export default function Header(): ReactNode {
 					to={"/"}
 					className="flex gap-2 p-2 cursor-pointer pl-4 items-center"
 				>
-					<img src={logo} alt="tasknote" className="h-4" />
-					<p className="text-lg font-semibold">
-						<span className="italic">Task</span>
+					<img src={logo} alt="tasknote" className="h-5" />
+					<p className="text-lg font-semibold poppins">
+						<span className="font-light">Task</span>
 						<span>Note</span>
 					</p>
 				</Link>
